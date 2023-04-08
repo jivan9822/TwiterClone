@@ -56,3 +56,28 @@ input[type='password'] {
   cursor: not-allowed;
   background-color: #ff8cf5;
 }
+
+.backdropMessage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  z-index: 9999;
+}
+.backdropMessage > p {
+  background-color: red;
+  color: white;
+  padding: 20px;
+}
+.LoginSuccess {
+  background-color: green;
+  color: white;
+  padding: 20px;
+}
