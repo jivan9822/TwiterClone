@@ -27,10 +27,10 @@ input[type='password'] {
   font-size: 16px;
   width: 90%;
 }
-button[type='submit'] {
+.btn {
   margin-top: 10px;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #5e0080;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -39,6 +39,20 @@ button[type='submit'] {
   width: 100%;
   transition: 0.5s;
 }
-button[type='submit']:hover {
-  background-color: #0069d9;
+.btn:hover {
+  background-color: #cf59e1;
+}
+
+.btnNotAllowed {
+  margin-top: 10px;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.5s;
+  cursor: not-allowed;
+  background-color: #ff8cf5;
 }
