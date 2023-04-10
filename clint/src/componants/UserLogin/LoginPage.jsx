@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './userreglog.module.css';
+import axios from 'axios';
 
 function LoginPage() {
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -23,7 +24,20 @@ function LoginPage() {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(userName, password);
+    axios
+      .post(
+        'http://localhost:3002/user/login',
+        {
+          data: { userName, password },
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <form onSubmit={onSubmitHandler}>

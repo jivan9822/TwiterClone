@@ -52,7 +52,7 @@ const UserRegistration = (props) => {
     if (isValidInputs(userInputs)) {
       console.log('Valid');
       axios
-        .post('http://localhost:3002/login/registration', userInputs)
+        .post('http://localhost:3002/user/registration', userInputs)
         .then((res) => {
           console.log(res);
           setHasLoginSuccess(true);

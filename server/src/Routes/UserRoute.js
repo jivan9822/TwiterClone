@@ -1,13 +1,11 @@
+const { UserLogin } = require('../Controller/UserLogin');
 const { userRegistration } = require('../Controller/UserRegistration');
-const { requireLogin } = require('../MiddleWare/loginMiddleware');
+const { authentication } = require('../MiddleWare/protectedMiddleware');
 
 const router = require('express').Router();
 
 router.post('/registration', userRegistration);
 
-router.get('/', (req, res, next) => {
-  console.log(req.body);
-  res.send('Hello');
-});
+router.post('/login', authentication, UserLogin);
 
 module.exports = router;

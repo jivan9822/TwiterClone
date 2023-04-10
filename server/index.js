@@ -2,20 +2,20 @@ require('dotenv').config({ path: 'config.env' });
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('./src/Utils/MongooseConnection');
-const login = require('./src/Routes/Login');
-const { requireLogin } = require('./src/MiddleWare/loginMiddleware');
+const userRoute = require('./src/Routes/UserRoute');
 const AppError = require('./src/Utils/AppError');
 const { globalErrorHandler } = require('./src/Utils/globalErrorHandler');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  })
+);
 
-app.get('/', requireLogin, (req, res, next) => {
-  console.log(req.query.data);
-  res.send('HomePage');
-});
-app.use('/login', login);
+app.use('/user', userRoute);
 
 app.all('*', (req, res, next) => {
   return next(new AppError(`The ${req.originalUrl} not found in server!`, 400));
