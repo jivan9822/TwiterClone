@@ -16,3 +16,13 @@ exports.UserLogin = (req, res, next) => {
     },
   });
 };
+
+exports.isValidUser = CatchAsync(async (req, res, next) => {
+  res.status(200).json({
+    status: true,
+    message: 'User verification success!',
+    data: {
+      user: req.user,
+    },
+  });
+});

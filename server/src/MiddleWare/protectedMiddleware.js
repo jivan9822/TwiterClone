@@ -3,6 +3,7 @@ const { promisify } = require('util');
 const AppError = require('../Utils/AppError');
 const { CatchAsync } = require('../Utils/CatchAsync');
 const jwt = require('jsonwebtoken');
+const { setUserAuth, getUserAuth } = require('../Utils/RedisHandler');
 
 exports.authentication = CatchAsync(async (req, res, next) => {
   const { userName, password } = req.body.data;
@@ -13,11 +14,11 @@ exports.authentication = CatchAsync(async (req, res, next) => {
   if (!(await user.comparePass(password, user.password))) {
     return next(new AppError('Incorrect password! Please try again!', 400));
   }
-
   const token = jwt.sign({ id: user._id }, process.env.JWT_SEC_STRING);
   req.token = token;
   user.password = undefined;
   req.user = user;
+  setUserAuth(user._id, user);
   next();
 });
 
@@ -28,19 +29,14 @@ exports.protect = CatchAsync(async (req, res, next) => {
   } else if (req.cookies.jwt) {
     token = req.cookies.jwt;
   }
-  console.log(req.cookies);
   if (!token) {
     return next(new AppError('You are not logged in! Please login...', 403));
   }
   const decode = await promisify(jwt.verify)(token, process.env.JWT_SEC_STRING);
-  const user = await User.findById(decode.id);
+  const user = await getUserAuth(decode.id);
+  // const user = await User.findById(decode.id);
   if (!user) {
-    return next(
-      new AppError(
-        'The user belonging to this token does no longer exist.',
-        401
-      )
-    );
+    return next(new AppError('Session time-out!! Please login again!', 401));
   }
   req.user = user;
   next();

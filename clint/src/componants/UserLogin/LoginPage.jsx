@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import classes from './userreglog.module.css';
 import axios from 'axios';
 
-function LoginPage() {
+function LoginPage(props) {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +34,7 @@ function LoginPage() {
       )
       .then((res) => {
         console.log(res);
+        props.onLogin(true);
       })
       .catch((err) => {
         console.log(err);

@@ -1,6 +1,7 @@
 require('dotenv').config({ path: 'config.env' });
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const mongoose = require('./src/Utils/MongooseConnection');
 const userRoute = require('./src/Routes/UserRoute');
 const AppError = require('./src/Utils/AppError');
@@ -14,7 +15,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(cookieParser());
 app.use('/user', userRoute);
 
 app.all('*', (req, res, next) => {
