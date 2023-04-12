@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './userreglog.module.css';
 import axios from 'axios';
 
+const initialState = {
+  userName: '',
+  password: '',
+};
+const reducer = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case 'userName': {
+      return {
+        ...state,
+        userName: payload,
+      };
+    }
+    case 'password': {
+      return {
+        ...state,
+        password: payload,
+      };
+    }
+    default: {
+      throw new Error('Invalid action type');
+    }
+  }
+};
 function LoginPage(props) {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-
   const onUserInputHandler = (e) => {
     const { name, value } = e.target;
-    if (name === 'name') {
-      setUserName(value);
-    }
-    if (name === 'password') {
-      setPassword(value);
-    }
-    if (userName.length > 2 && password.length > 2) {
+    dispatch({ type: name, payload: value.trim() });
+    if (state.userName.length > 2 && state.password.length > 2) {
       setBtnDisabled(false);
     } else {
       setBtnDisabled(true);
@@ -28,7 +45,7 @@ function LoginPage(props) {
       .post(
         'http://localhost:3002/user/login',
         {
-          data: { userName, password },
+          data: { userName: state.userName, password: state.password },
         },
         { withCredentials: true }
       )
@@ -44,12 +61,22 @@ function LoginPage(props) {
     <form onSubmit={onSubmitHandler}>
       <h1>Login</h1>
       <div>
-        <label htmlFor='name'>Username:</label>
-        <input type='text' name='name' onChange={onUserInputHandler} />
+        <label htmlFor='userName'>Username:</label>
+        <input
+          type='text'
+          name='userName'
+          value={state.userName}
+          onChange={onUserInputHandler}
+        />
       </div>
       <div>
         <label htmlFor='password'>Password:</label>
-        <input type='password' name='password' onChange={onUserInputHandler} />
+        <input
+          type='password'
+          name='password'
+          value={state.password}
+          onChange={onUserInputHandler}
+        />
       </div>
       <button
         type='submit'
