@@ -1,5 +1,4 @@
 import HomePage from './componants/HomePage/HomePage';
-import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import LoginPage from './componants/UserLogin/LoginPage';
@@ -20,9 +19,7 @@ const App = (props) => {
       });
   }, []);
   return (
-    <div className='App'>
-      {isLogin ? <HomePage /> : <LoginPage onLogin={setIsLogin} />}
-    </div>
+    <div>{isLogin ? <HomePage /> : <LoginPage onLogin={setIsLogin} />}</div>
   );
 };
 
