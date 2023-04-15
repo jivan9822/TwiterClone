@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Card from './Utils/Card';
 import UserLoginOrRegister from './componants/UserLogin/UserLoginOrRegister';
+import userContext from "./Context'/user-context";
 
 const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
@@ -22,7 +23,9 @@ const App = (props) => {
   }, []);
   return (
     <Card>
-      {isLogin ? <HomePage /> : <UserLoginOrRegister onLogin={setIsLogin} />}
+      <userContext.Provider value={{ user: userData }}>
+        {isLogin ? <HomePage /> : <UserLoginOrRegister onLogin={setIsLogin} />}
+      </userContext.Provider>
     </Card>
   );
 };

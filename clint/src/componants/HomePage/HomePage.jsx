@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa';
 import classes from './home.module.css';
 import PostForm from './Post/PostForm';
+
 function HomePage() {
   return (
     <div className={classes.container}>
