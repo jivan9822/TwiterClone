@@ -1,8 +1,12 @@
-import { useRef } from 'react';
+import { useRef, useContext, useState } from 'react';
 import classes from './postform.module.css';
 import axios from 'axios';
+import DisplayPost from './DisplayPost';
+import postContext from '../../../Context/post-context';
 
 const PostForm = (props) => {
+  const { posts } = useContext(postContext);
+  const [userPosts, setUserPosts] = useState(false);
   const postRef = useRef();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -14,7 +18,9 @@ const PostForm = (props) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
+        setUserPosts((old) => !old);
+        posts.push(res.data.post);
+        posts.reverse();
       })
       .catch((err) => {
         console.log(err);
@@ -22,12 +28,15 @@ const PostForm = (props) => {
     postRef.current.value = '';
   };
   return (
-    <div className={classes.postForm}>
-      <div className={classes.container}>
-        <img src='images/profilePic.jpg' className={classes.img} />
-        <textarea autoFocus ref={postRef} />
+    <div>
+      <div className={classes.postForm}>
+        <div className={classes.container}>
+          <img src='images/profilePic.jpg' className={classes.img} />
+          <textarea autoFocus ref={postRef} />
+        </div>
+        <button onClick={submitHandler}>ADD-POST</button>
       </div>
-      <button onClick={submitHandler}>ADD-POST</button>
+      <DisplayPost posts={posts} />
     </div>
   );
 };
