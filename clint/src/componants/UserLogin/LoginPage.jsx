@@ -1,5 +1,4 @@
 import React, { useState, useReducer } from 'react';
-import { Link } from 'react-router-dom';
 import classes from './userreglog.module.css';
 import axios from 'axios';
 
@@ -30,6 +29,10 @@ const reducer = (state, action) => {
 function LoginPage(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [btnDisabled, setBtnDisabled] = useState(true);
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    props.onRegClick(false);
+  };
   const onUserInputHandler = (e) => {
     const { name, value } = e.target;
     dispatch({ type: name, payload: value.trim() });
@@ -85,7 +88,9 @@ function LoginPage(props) {
       >
         Login
       </button>
-      <Link to='/register'>Register?</Link>
+      <p style={{ cursor: 'pointer' }} onClick={onClickHandler}>
+        Register?
+      </p>
     </form>
   );
 }

@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import classes from './userreglog.module.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 let pass, confPass;
@@ -12,6 +11,10 @@ const isValidInputs = ({ password, confirmPassword }) => {
 };
 
 const UserRegistration = (props) => {
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    props.onLoginClick(true);
+  };
   const [userInputs, setUserInputs] = useState({
     fname: '',
     lname: '',
@@ -150,7 +153,9 @@ const UserRegistration = (props) => {
         >
           Register
         </button>
-        <Link to='/'>Already Register?</Link>
+        <p style={{ cursor: 'pointer' }} onClick={onClickHandler}>
+          Already Register?
+        </p>
       </form>
       {hasError && (
         <div className={classes.backdropMessage}>
@@ -161,7 +166,9 @@ const UserRegistration = (props) => {
         <div className={classes.backdropMessage}>
           <div className={classes.LoginSuccess}>
             <p>Registration Success</p>
-            <Link to='/'>Click to Login!</Link>
+            <p style={{ cursor: 'pointer' }} onClick={onClickHandler}>
+              Click to Login!
+            </p>
           </div>
         </div>
       )}

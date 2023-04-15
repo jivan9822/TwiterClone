@@ -1,0 +1,33 @@
+.container {
+  width: 800px;
+  display: flex;
+  gap: 10px;
+  margin: 10px;
+}
+.img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+textarea {
+  flex-grow: 0.8;
+  height: 70px;
+}
+.postForm {
+  display: flex;
+  width: 180px;
+  display: block;
+}
+.postForm button {
+  background-color: rgb(142, 1, 149);
+  color: white;
+  margin-top: 10px;
+  border: none;
+  transition: 0.5s;
+}
+.postForm button:hover {
+  background-color: rgb(95, 0, 102);
+  color: white;
+  margin-top: 10px;
+  border: none;
+}

@@ -2,6 +2,9 @@ import HomePage from './componants/HomePage/HomePage';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import LoginPage from './componants/UserLogin/LoginPage';
+import UserRegistration from './componants/UserLogin/UserRagistration';
+import Card from './Utils/Card';
+import UserLoginOrRegister from './componants/UserLogin/UserLoginOrRegister';
 const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState(null);
@@ -10,8 +13,8 @@ const App = (props) => {
       .get('http://localhost:3002/user/isLogin', { withCredentials: true })
       .then((user) => {
         const userData = user.data.data.user;
-        setIsLogin(true);
         setUserData(userData);
+        setIsLogin(true);
       })
       .catch((err) => {
         setIsLogin(false);
@@ -19,7 +22,9 @@ const App = (props) => {
       });
   }, []);
   return (
-    <div>{isLogin ? <HomePage /> : <LoginPage onLogin={setIsLogin} />}</div>
+    <Card>
+      {isLogin ? <HomePage /> : <UserLoginOrRegister onLogin={setIsLogin} />}
+    </Card>
   );
 };
 
