@@ -26,3 +26,7 @@ exports.isValidUser = CatchAsync(async (req, res, next) => {
     },
   });
 });
+exports.userRegistration = CatchAsync(async (req, res, next) => {
+  const user = await User.create(req.body);
+  res.send('User Registration!');
+});

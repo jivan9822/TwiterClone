@@ -1,5 +1,5 @@
-const { UserLogin, isValidUser } = require('../Controller/UserLogin');
-const { userRegistration } = require('../Controller/UserRegistration');
+const { UserLogin, isValidUser } = require('../Controller/UserController');
+const { userRegistration } = require('../Controller/UserController');
 const {
   authentication,
   protect,

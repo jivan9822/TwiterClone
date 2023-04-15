@@ -1,10 +1,9 @@
 import HomePage from './componants/HomePage/HomePage';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import LoginPage from './componants/UserLogin/LoginPage';
-import UserRegistration from './componants/UserLogin/UserRagistration';
 import Card from './Utils/Card';
 import UserLoginOrRegister from './componants/UserLogin/UserLoginOrRegister';
+
 const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState(null);
