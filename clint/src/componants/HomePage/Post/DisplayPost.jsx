@@ -1,4 +1,5 @@
 import classes from './display.module.css';
+import moment from 'moment';
 
 const DisplayPost = ({ posts }) => {
   return (
@@ -7,6 +8,7 @@ const DisplayPost = ({ posts }) => {
         <div className={classes.userPost} key={post._id}>
           <img src={post.postedBy.profilePic} />
           <h3>{post.content}</h3>
+          <p>{moment(post.createdAt).fromNow()}</p>
         </div>
       ))}
     </div>

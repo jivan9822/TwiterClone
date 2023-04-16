@@ -9,6 +9,7 @@ const AppError = require('./src/Utils/AppError');
 const { globalErrorHandler } = require('./src/Utils/globalErrorHandler');
 
 const app = express();
+app.use(express.static('src/images/'));
 app.use(express.json());
 app.use(
   cors({

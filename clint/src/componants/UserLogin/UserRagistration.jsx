@@ -22,12 +22,18 @@ const UserRegistration = (props) => {
     email: '',
     password: '',
     confirmPassword: '',
+    profilePic: null,
   });
 
   const confirmPassRef = useRef(null);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [hasLoginSuccess, setHasLoginSuccess] = useState(false);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setUserInputs((old) => ({ ...old, profilePic: file }));
+  };
 
   const onUserInputHandler = (e) => {
     const { name, value } = e.target;
@@ -53,9 +59,16 @@ const UserRegistration = (props) => {
   const onFormSubmitHandler = (e) => {
     e.preventDefault();
     if (isValidInputs(userInputs)) {
-      console.log('Valid');
+      const formData = new FormData();
+      Object.entries(userInputs).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
       axios
-        .post('http://localhost:3002/user/registration', userInputs)
+        .post('http://localhost:3002/user/registration', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
         .then((res) => {
           console.log(res);
           setHasLoginSuccess(true);
@@ -145,6 +158,12 @@ const UserRegistration = (props) => {
             ref={confirmPassRef}
             required
           />
+        </div>
+        <div className={classes['form-group']}>
+          <label>
+            Profile Picture:
+            <input type='file' onChange={handleFileChange} />
+          </label>
         </div>
         <button
           type='submit'
