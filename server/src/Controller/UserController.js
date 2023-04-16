@@ -28,8 +28,6 @@ exports.isValidUser = CatchAsync(async (req, res, next) => {
   });
 });
 exports.userRegistration = CatchAsync(async (req, res, next) => {
-  // console.log(req.body);
-  // console.log(req.file);
   const user = await User.create(req.body);
   res.send('User Registration!');
 });

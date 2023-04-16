@@ -86,14 +86,14 @@ const UserRegistration = (props) => {
       alert('Confirm Password is not same with password!');
       confirmPassRef.current.focus();
     }
-    setUserInputs({
-      fname: '',
-      lname: '',
-      userName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
+    // setUserInputs({
+    //   fname: '',
+    //   lname: '',
+    //   userName: '',
+    //   email: '',
+    //   password: '',
+    //   confirmPassword: '',
+    // });
   };
   return (
     <div onClick={() => setHasError(false)}>

@@ -30,7 +30,7 @@ const UserSchema = mongoose.Schema({
   },
   profilePic: {
     type: String,
-    default: 'images/profilePic.jpg',
+    default: 'http://localhost:3002/default.jpg',
   },
 });
 
