@@ -1,5 +1,5 @@
 .container {
-  width: 800px;
+  width: 650px;
   display: flex;
   gap: 10px;
   margin: 10px;
@@ -9,14 +9,17 @@
   width: 40px;
   height: 40px;
 }
-textarea {
-  flex-grow: 0.8;
-  height: 70px;
-}
 .postForm {
   display: flex;
-  width: 180px;
-  display: block;
+  width: 600px;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 50px;
+}
+.textarea {
+  width: 500px;
+  height: 50px;
+  border: 1px solid grey;
 }
 .postForm button {
   background-color: rgb(142, 1, 149);
@@ -24,8 +27,7 @@ textarea {
   width: 150px;
   cursor: pointer;
   padding: 10px;
-  margin-top: 10px;
-  margin-left: 100px;
+  margin-left: 10px;
   border: none;
   transition: 0.5s;
 }

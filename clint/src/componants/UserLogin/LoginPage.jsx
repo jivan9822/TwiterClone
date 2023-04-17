@@ -61,10 +61,12 @@ function LoginPage(props) {
       });
   };
   return (
-    <form onSubmit={onSubmitHandler}>
+    <form className={classes.form} onSubmit={onSubmitHandler}>
       <h1>Login</h1>
       <div>
-        <label htmlFor='userName'>Username:</label>
+        <label className={classes.label} htmlFor='userName'>
+          Username:
+        </label>
         <input
           type='text'
           name='userName'
@@ -73,7 +75,9 @@ function LoginPage(props) {
         />
       </div>
       <div>
-        <label htmlFor='password'>Password:</label>
+        <label className={classes.label} htmlFor='password'>
+          Password:
+        </label>
         <input
           type='password'
           name='password'
