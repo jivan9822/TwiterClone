@@ -32,6 +32,12 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: 'http://localhost:3002/default.jpg',
   },
+  likes: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: 'Post',
+    },
+  ],
 });
 
 UserSchema.pre('save', async function (next) {

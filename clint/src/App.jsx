@@ -37,7 +37,7 @@ const App = (props) => {
       <userContext.Provider value={{ user: userData }}>
         <postContext.Provider value={{ posts: userPostData }}>
           {isLogin ? (
-            <HomePage />
+            <HomePage user={userData} />
           ) : (
             <UserLoginOrRegister onLogin={setIsLogin} />
           )}
