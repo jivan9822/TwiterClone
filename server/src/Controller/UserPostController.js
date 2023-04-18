@@ -15,7 +15,14 @@ exports.addPost = CatchAsync(async (req, res, next) => {
 });
 
 exports.getAllPosts = CatchAsync(async (req, res, next) => {
-  const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy');
+  const posts = await Post.find()
+    .sort({ createdAt: -1 })
+    .populate('postedBy')
+    .populate({
+      path: 'replies',
+      options: { sort: { createdAt: -1 } }, // Sort the replies array on createdAt
+    });
+
   res.status(200).json({
     status: true,
     message: `${posts.length} posts found!`,

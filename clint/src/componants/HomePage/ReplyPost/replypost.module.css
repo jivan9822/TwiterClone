@@ -1,0 +1,37 @@
+.textarea {
+  height: 40px;
+  width: 500px;
+  border: none;
+  border-radius: 10px;
+}
+.button {
+  border: none;
+  background-color: rgb(83, 83, 255);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.button:hover {
+  background-color: blue;
+}
+.form {
+  display: flex;
+  gap: 5px;
+}
+
+.postMainDiv {
+  display: flex;
+  margin-left: 30px;
+  background-color: grey;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  gap: 5px;
+  /* width: 80%; */
+}
+.postMainDiv img {
+  width: 25px;
+  height: 25px;
+}

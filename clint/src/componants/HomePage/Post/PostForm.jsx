@@ -29,7 +29,7 @@ const PostForm = (props) => {
   };
   return (
     <div>
-      <h1>Welcome-{props.user.fname}</h1>
+      <h1>Welcome-{props?.user?.fname}</h1>
       <div className={classes.postForm}>
         <div className={classes.container}>
           <img src='images/profilePic.jpg' className={classes.img} />

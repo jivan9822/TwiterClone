@@ -1,0 +1,55 @@
+.container {
+  margin-left: 70px;
+  width: 600px;
+  max-height: 300px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 10px;
+  color: rgb(67, 67, 67);
+  border-radius: 20px;
+}
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.userPost {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(143, 152, 142);
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.postMainDiv {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.icon {
+  color: rgb(52, 52, 52);
+  size: 10px;
+  cursor: pointer;
+}
+.iconDiv {
+  display: flex;
+  gap: 50px;
+}
+.otherContent {
+  display: flex;
+  flex-direction: column;
+}
+h3 {
+  font-family: 'Sono', sans-serif;
+  color: black;
+  margin: 5px;
+}
+/* { display: 'flex', alignItems: 'center', gap: '5px' } */
+.spanDiv {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

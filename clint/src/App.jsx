@@ -10,6 +10,9 @@ const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userPostData, setUserPostData] = useState([]);
+  const [render, setRender] = useState(false);
+  const handleRender = () => setRender((old) => !old);
+  console.log('Render done!');
   useEffect(() => {
     axios
       .get('http://localhost:3002/user/isLogin', { withCredentials: true })
@@ -31,10 +34,10 @@ const App = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [render]);
   return (
     <Card>
-      <userContext.Provider value={{ user: userData }}>
+      <userContext.Provider value={{ user: userData, handleRender }}>
         <postContext.Provider value={{ posts: userPostData }}>
           {isLogin ? (
             <HomePage user={userData} />
