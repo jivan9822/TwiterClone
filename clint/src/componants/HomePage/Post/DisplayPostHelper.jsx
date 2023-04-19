@@ -17,7 +17,6 @@ const DisplayPostHelper = ({ post }) => {
   const [onReplyClick, setReplyClick] = useState(false);
 
   const onClickHandler = (e, name, reply) => {
-    console.log(name);
     e.preventDefault();
     axios
       .post(
@@ -30,7 +29,6 @@ const DisplayPostHelper = ({ post }) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
         if (name === 'like') {
           setLikesLength(res.data.post?.likes.length);
           setLikeColor((old) => (old === 'black' ? 'red' : 'black'));

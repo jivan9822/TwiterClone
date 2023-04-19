@@ -12,7 +12,6 @@ const App = (props) => {
   const [userPostData, setUserPostData] = useState([]);
   const [render, setRender] = useState(false);
   const handleRender = () => setRender((old) => !old);
-  console.log('Render done!');
   useEffect(() => {
     axios
       .get('http://localhost:3002/user/isLogin', { withCredentials: true })
