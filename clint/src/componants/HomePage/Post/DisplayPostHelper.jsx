@@ -2,19 +2,21 @@ import moment from 'moment';
 import classes from './display.module.css';
 import axios from 'axios';
 import { FaFacebookMessenger, FaRetweet, FaHeart } from 'react-icons/fa';
-import { useContext, useState } from 'react';
-import userContext from '../../../Context/user-context';
+import { useReducer, useState } from 'react';
 import ReplyPostForm from '../ReplyPost/ReplyPostForm';
 import DisplayReplies from '../ReplyPost/DisplayReplies';
+import { useUserData } from '../../../CustomHooks/UserAndPostData';
+import {
+  initialState,
+  reducer,
+} from '../../../Utils/ReducersFunctions/DisplayPostReduce';
 
 const DisplayPostHelper = ({ post }) => {
-  const user = useContext(userContext);
+  const { user, initialColor, allPost } = useUserData(post); // Custom Hook
+  const [state, dispatch] = useReducer(reducer, initialState);
   const postId = post._id;
-  const initialColor = post.likes && post.likes.includes(user.user._id);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
-  const [likesLength, setLikesLength] = useState(post.likes.length);
-  const [showReplies, setShowReplies] = useState(false);
-  const [onReplyClick, setReplyClick] = useState(false);
+  const [likesLength, setLikesLength] = useState(post?.likes?.length);
 
   const onClickHandler = (e, name, reply) => {
     e.preventDefault();
@@ -63,12 +65,14 @@ const DisplayPostHelper = ({ post }) => {
             <span className={classes.spanDiv}>
               <FaFacebookMessenger
                 onClick={(e) => {
-                  setReplyClick((old) => !old);
+                  dispatch({ type: 'reply' });
                 }}
                 className={classes.icon}
               />
               <span
-                onClick={() => setShowReplies((old) => !old)}
+                onClick={() => {
+                  dispatch({ type: 'showReply' });
+                }}
                 style={{ cursor: 'pointer' }}
               >
                 {post.replies.length || ''}
@@ -92,8 +96,8 @@ const DisplayPostHelper = ({ post }) => {
           </div>
         </div>
       </div>
-      {onReplyClick && <ReplyPostForm onClick={onClickHandler} />}
-      {showReplies && <DisplayReplies replies={post.replies} />}
+      {state.onReplyClick && <ReplyPostForm onClick={onClickHandler} />}
+      {state.showReplies && <DisplayReplies replies={post.replies} />}
     </div>
   );
 };
