@@ -27,7 +27,13 @@ img {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
+}
+.imageOthers {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 .icon {
   color: rgb(52, 52, 52);
@@ -52,4 +58,14 @@ h3 {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+.editDeleteBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.delBtn,
+.edtBtn {
+  cursor: pointer;
 }
