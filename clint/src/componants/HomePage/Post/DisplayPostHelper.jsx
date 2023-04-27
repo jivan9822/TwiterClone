@@ -1,6 +1,7 @@
 import moment from 'moment';
 import classes from './display.module.css';
 import axios from 'axios';
+import { DeletePost } from '../../../ApiCall/DeletePost';
 import {
   FaFacebookMessenger,
   FaRetweet,
@@ -21,6 +22,11 @@ const DisplayPostHelper = ({ post }) => {
   const initialColor = post.likes?.includes(state.loginUser._id);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(post?.likes?.length);
+
+  const deletePostHandler = (e) => {
+    e.preventDefault();
+    dispatch(DeletePost(post._id));
+  };
 
   const onClickHandler = (e, name, reply) => {
     e.preventDefault();
@@ -102,7 +108,11 @@ const DisplayPostHelper = ({ post }) => {
         </div>
         {flag && (
           <div className={classes.editDeleteBtn}>
-            <FaTrash fill='black' className={classes.delBtn} />
+            <FaTrash
+              fill='black'
+              className={classes.delBtn}
+              onClick={deletePostHandler}
+            />
             <FaEdit fill='black' className={classes.edtBtn} />
           </div>
         )}
