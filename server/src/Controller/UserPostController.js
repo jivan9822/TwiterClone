@@ -29,3 +29,11 @@ exports.getAllPosts = CatchAsync(async (req, res, next) => {
     posts,
   });
 });
+
+exports.deletePost = CatchAsync(async (req, res, next) => {
+  const postId = req.body.postId;
+  await Post.findByIdAndDelete(postId);
+  res.status(204).json({
+    status: true,
+  });
+});
