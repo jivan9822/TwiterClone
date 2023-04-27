@@ -1,52 +1,36 @@
 import HomePage from './componants/HomePage/HomePage';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from './Utils/Card';
 import UserLoginOrRegister from './componants/UserLogin/UserLoginOrRegister';
-import userContext from './Context/user-context';
-import postContext from './Context/post-context';
 
 const App = (props) => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [userPostData, setUserPostData] = useState([]);
-  const [render, setRender] = useState(false);
-  const handleRender = () => setRender((old) => !old);
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state.loginUser);
   useEffect(() => {
     axios
       .get('http://localhost:3002/user/isLogin', { withCredentials: true })
       .then((user) => {
         const userData = user.data.data.user;
-        setUserData(userData);
-        setIsLogin(true);
+        dispatch({ type: 'SET_LOGIN_USER', payload: userData });
       })
       .catch((err) => {
-        setIsLogin(false);
+        dispatch({ type: 'SET_LOGIN_USER', payload: null });
         console.log(err);
       });
 
     axios
       .get('http://localhost:3002/userPost/getAllPost')
       .then((res) => {
-        setUserPostData(res.data.posts);
+        dispatch({ type: 'SET_POST_DATA', payload: res.data.posts });
       })
       .catch((err) => {
+        dispatch({ type: 'SET_POST_DATA', payload: [] });
         console.log(err);
       });
-  }, [render]);
-  return (
-    <Card>
-      <userContext.Provider value={{ user: userData, handleRender }}>
-        <postContext.Provider value={{ posts: userPostData }}>
-          {isLogin ? (
-            <HomePage user={userData} />
-          ) : (
-            <UserLoginOrRegister onLogin={setIsLogin} />
-          )}
-        </postContext.Provider>
-      </userContext.Provider>
-    </Card>
-  );
+  }, []);
+  return <Card>{isLogin ? <HomePage /> : <UserLoginOrRegister />}</Card>;
 };
 
 export default App;

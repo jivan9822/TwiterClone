@@ -1,12 +1,13 @@
-import { useRef, useContext, useState } from 'react';
+import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './postform.module.css';
 import axios from 'axios';
 import DisplayPost from './DisplayPost';
-import postContext from '../../../Context/post-context';
 
-const PostForm = (props) => {
-  const { posts } = useContext(postContext);
-  const [userPosts, setUserPosts] = useState(false);
+const PostForm = () => {
+  const user = useSelector((state) => state.loginUser);
+  const posts = useSelector((state) => state.postData);
+  const dispatch = useDispatch();
   const postRef = useRef();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -18,9 +19,7 @@ const PostForm = (props) => {
         { withCredentials: true }
       )
       .then((res) => {
-        setUserPosts((old) => !old);
-        posts.push(res.data.post);
-        posts.reverse();
+        dispatch({ type: 'ADD_POST', payload: res.data.post });
       })
       .catch((err) => {
         console.log(err);
@@ -29,7 +28,7 @@ const PostForm = (props) => {
   };
   return (
     <div>
-      <h1>Welcome-{props?.user?.fname}</h1>
+      <h1>Welcome-{user?.fname}</h1>
       <div className={classes.postForm}>
         <div className={classes.container}>
           <img src='images/profilePic.jpg' className={classes.img} />
@@ -42,7 +41,7 @@ const PostForm = (props) => {
         </div>
         <button onClick={submitHandler}>ADD-POST</button>
       </div>
-      <DisplayPost posts={posts} />
+      <DisplayPost />
     </div>
   );
 };

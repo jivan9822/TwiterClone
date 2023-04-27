@@ -2,19 +2,16 @@ import moment from 'moment';
 import classes from './display.module.css';
 import axios from 'axios';
 import { FaFacebookMessenger, FaRetweet, FaHeart } from 'react-icons/fa';
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 import ReplyPostForm from '../ReplyPost/ReplyPostForm';
 import DisplayReplies from '../ReplyPost/DisplayReplies';
-import { useUserData } from '../../../CustomHooks/UserAndPostData';
-import {
-  initialState,
-  reducer,
-} from '../../../Utils/ReducersFunctions/DisplayPostReduce';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DisplayPostHelper = ({ post }) => {
-  const { user, initialColor, allPost } = useUserData(post); // Custom Hook
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const postId = post._id;
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const initialColor = post.likes?.includes(state.loginUser._id);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(post?.likes?.length);
 
@@ -24,8 +21,8 @@ const DisplayPostHelper = ({ post }) => {
       .post(
         `http://localhost:3002/userAction/${name}`,
         {
-          postId,
-          userId: user.user._id,
+          postId: post._id,
+          userId: state.loginUser._id,
           reply,
         },
         { withCredentials: true }
@@ -39,7 +36,6 @@ const DisplayPostHelper = ({ post }) => {
       .catch((err) => {
         console.log(err);
       });
-    user.handleRender();
   };
 
   return (
@@ -75,7 +71,7 @@ const DisplayPostHelper = ({ post }) => {
                 }}
                 style={{ cursor: 'pointer' }}
               >
-                {post.replies.length || ''}
+                {post.replies?.length || ''}
               </span>
             </span>
             <span className={classes.spanDiv}>

@@ -11,7 +11,7 @@ import classes from './home.module.css';
 import PostForm from './Post/PostForm';
 import { useState } from 'react';
 
-function HomePage(props) {
+function HomePage() {
   const [isHome, setIsHome] = useState(true);
   return (
     <div className={classes.container}>
@@ -37,9 +37,7 @@ function HomePage(props) {
         <FaUser className={classes.icon} size={40} />
         <FaSignOutAlt className={classes.icon} size={40} />
       </div>
-      <div>
-        {isHome ? <PostForm user={props.user} /> : <h1>Work in progress!</h1>}
-      </div>
+      <div>{isHome ? <PostForm /> : <h1>Work in progress!</h1>}</div>
     </div>
   );
 }

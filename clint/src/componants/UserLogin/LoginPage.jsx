@@ -54,7 +54,6 @@ function LoginPage(props) {
       )
       .then((res) => {
         console.log(res);
-        props.onLogin(true);
       })
       .catch((err) => {
         console.log(err);
