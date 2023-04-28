@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
+
 import thunk from 'redux-thunk';
 
 const initialState = {
@@ -46,6 +47,20 @@ const reducer = (state = initialState, action) => {
         }),
       };
     }
+    case 'DELETE_REPLY': {
+      return {
+        ...state,
+        postData: state.postData.map((each) => {
+          if (each._id === payload.postId) {
+            each.replies = each.replies.filter(
+              (reply) => reply._id !== payload.replyId
+            );
+          }
+          return each;
+        }),
+      };
+    }
+
     case 'DELETE_POST': {
       return {
         ...state,

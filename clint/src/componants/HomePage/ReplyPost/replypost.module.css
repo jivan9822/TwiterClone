@@ -35,3 +35,13 @@
   width: 25px;
   height: 25px;
 }
+.editDeleteBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.delBtn,
+.edtBtn {
+  cursor: pointer;
+}

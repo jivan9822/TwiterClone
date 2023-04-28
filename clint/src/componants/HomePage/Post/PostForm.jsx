@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './postform.module.css';
 import DisplayPost from './DisplayPost';
-import { AddPost } from '../../../ApiCall/AddPost';
+import { AddPost } from '../../../ApiCall/Add';
 
 const PostForm = () => {
   const user = useSelector((state) => state.loginUser);

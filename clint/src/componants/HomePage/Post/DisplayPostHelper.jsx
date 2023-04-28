@@ -1,7 +1,7 @@
 import moment from 'moment';
 import classes from './display.module.css';
 import axios from 'axios';
-import { DeletePost } from '../../../ApiCall/DeletePost';
+import { DeletePost } from '../../../ApiCall/Delete';
 import {
   FaFacebookMessenger,
   FaRetweet,
@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReplyPostForm from '../ReplyPost/ReplyPostForm';
 import DisplayReplies from '../ReplyPost/DisplayReplies';
 import { useDispatch, useSelector } from 'react-redux';
-import { EditPost } from '../../../ApiCall/EditPost';
+import { EditPost } from '../../../ApiCall/Edit';
 
 const DisplayPostHelper = ({ post }) => {
   const state = useSelector((state) => state);

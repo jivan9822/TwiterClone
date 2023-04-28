@@ -36,7 +36,6 @@ exports.userRetweet = CatchAsync(async (req, res, next) => {
 });
 
 exports.userReply = CatchAsync(async (req, res, next) => {
-  const { postId, userId, reply } = req.body;
   const postReply = await Reply.create(req.body);
   const populatedReply = await Reply.populate(postReply, {
     path: 'userId',
@@ -45,5 +44,14 @@ exports.userReply = CatchAsync(async (req, res, next) => {
     status: true,
     message: 'Reply added success!',
     reply: populatedReply,
+  });
+});
+
+exports.deleteReply = CatchAsync(async (req, res, next) => {
+  const reply = await Reply.findByIdAndDelete(req.body.replyId);
+  res.status(204).json({
+    status: true,
+    message: 'Deletion Success!',
+    reply,
   });
 });
