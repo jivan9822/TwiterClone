@@ -38,10 +38,12 @@ exports.userRetweet = CatchAsync(async (req, res, next) => {
 exports.userReply = CatchAsync(async (req, res, next) => {
   const { postId, userId, reply } = req.body;
   const postReply = await Reply.create(req.body);
-  console.log(postId, userId, reply);
+  const populatedReply = await Reply.populate(postReply, {
+    path: 'userId',
+  });
   res.status(201).json({
     status: true,
     message: 'Reply added success!',
-    reply: postReply,
+    reply: populatedReply,
   });
 });

@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 const initialState = {
   loginUser: null,
   showReplies: false,
-  onReplyClick: false,
   allUser: [],
   postData: [],
 };
@@ -36,10 +35,15 @@ const reducer = (state = initialState, action) => {
         showReplies: !state.showReplies,
       };
     }
-    case 'reply': {
+    case 'ADD_REPLY': {
       return {
         ...state,
-        onReplyClick: !state.onReplyClick,
+        postData: state.postData.map((each) => {
+          if (each.id === payload.postId) {
+            each.replies.unshift(payload);
+          }
+          return each;
+        }),
       };
     }
     case 'DELETE_POST': {

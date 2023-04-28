@@ -23,6 +23,7 @@ const DisplayPostHelper = ({ post }) => {
   const initialColor = post.likes?.includes(state.loginUser._id);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(post?.likes?.length);
+  const [onReplyClick, setReplyClick] = useState(false);
   const contentRef = useRef();
   const [isEditable, setEditable] = useState(false);
 
@@ -44,6 +45,9 @@ const DisplayPostHelper = ({ post }) => {
         { withCredentials: true }
       )
       .then((res) => {
+        if (name === 'reply') {
+          dispatch({ type: 'ADD_REPLY', payload: res.data.reply });
+        }
         if (name === 'like') {
           setLikesLength(res.data.post?.likes.length);
           setLikeColor((old) => (old === 'black' ? 'red' : 'black'));
@@ -100,7 +104,7 @@ const DisplayPostHelper = ({ post }) => {
               <span className={classes.spanDiv}>
                 <FaFacebookMessenger
                   onClick={(e) => {
-                    dispatch({ type: 'reply' });
+                    setReplyClick((old) => !old);
                   }}
                   className={classes.icon}
                 />
@@ -146,7 +150,7 @@ const DisplayPostHelper = ({ post }) => {
           </div>
         )}
       </div>
-      {state.onReplyClick && <ReplyPostForm onClick={onClickHandler} />}
+      {onReplyClick && <ReplyPostForm onClick={onClickHandler} />}
       {state.showReplies && <DisplayReplies replies={post.replies} />}
     </div>
   );
