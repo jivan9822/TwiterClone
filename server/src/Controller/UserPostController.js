@@ -30,6 +30,17 @@ exports.getAllPosts = CatchAsync(async (req, res, next) => {
   });
 });
 
+exports.editPost = CatchAsync(async (req, res, next) => {
+  const post = await Post.findByIdAndUpdate(req.body.postId, {
+    $set: { content: req.body.newPost },
+  }).populate('postedBy');
+  res.status(200).json({
+    status: true,
+    message: 'Update done!',
+    post,
+  });
+});
+
 exports.deletePost = CatchAsync(async (req, res, next) => {
   const postId = req.body.postId;
   await Post.findByIdAndDelete(postId);

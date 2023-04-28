@@ -48,6 +48,14 @@ const reducer = (state = initialState, action) => {
         postData: state.postData.filter((each) => each._id !== payload),
       };
     }
+    case 'EDIT_POST': {
+      return {
+        ...state,
+        postData: state.postData.map((each) =>
+          each._id === payload._id ? payload : each
+        ),
+      };
+    }
     default:
       return state;
   }

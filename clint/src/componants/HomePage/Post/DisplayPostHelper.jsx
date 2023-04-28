@@ -9,10 +9,11 @@ import {
   FaTrash,
   FaEdit,
 } from 'react-icons/fa';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReplyPostForm from '../ReplyPost/ReplyPostForm';
 import DisplayReplies from '../ReplyPost/DisplayReplies';
 import { useDispatch, useSelector } from 'react-redux';
+import { EditPost } from '../../../ApiCall/EditPost';
 
 const DisplayPostHelper = ({ post }) => {
   const state = useSelector((state) => state);
@@ -22,6 +23,8 @@ const DisplayPostHelper = ({ post }) => {
   const initialColor = post.likes?.includes(state.loginUser._id);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(post?.likes?.length);
+  const contentRef = useRef();
+  const [isEditable, setEditable] = useState(false);
 
   const deletePostHandler = (e) => {
     e.preventDefault();
@@ -50,7 +53,21 @@ const DisplayPostHelper = ({ post }) => {
         console.log(err);
       });
   };
-
+  const onEnter = (e) => {
+    if (e.key === 'Enter') {
+      editHandler(e);
+    }
+  };
+  const editHandler = (e) => {
+    const text = contentRef.current.innerText.trim();
+    dispatch(EditPost(post._id, text));
+    setEditable(false);
+  };
+  useEffect(() => {
+    if (isEditable && contentRef.current) {
+      contentRef.current.focus();
+    }
+  }, [isEditable]);
   return (
     <div className={classes.userPost}>
       <div className={classes.postMainDiv}>
@@ -69,7 +86,15 @@ const DisplayPostHelper = ({ post }) => {
               </span>
             </div>
             <div>
-              <h3>{post.content}</h3>
+              <h3
+                ref={contentRef}
+                contentEditable={isEditable}
+                onBlur={editHandler}
+                onKeyUp={onEnter}
+                suppressContentEditableWarning
+              >
+                {post.content}
+              </h3>
             </div>
             <div className={classes.iconDiv}>
               <span className={classes.spanDiv}>
@@ -113,7 +138,11 @@ const DisplayPostHelper = ({ post }) => {
               className={classes.delBtn}
               onClick={deletePostHandler}
             />
-            <FaEdit fill='black' className={classes.edtBtn} />
+            <FaEdit
+              fill='black'
+              className={classes.edtBtn}
+              onClick={() => setEditable(true)}
+            />
           </div>
         )}
       </div>
