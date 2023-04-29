@@ -24,9 +24,12 @@ const DisplayPostHelper = ({ post }) => {
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(post?.likes?.length);
   const [onReplyClick, setReplyClick] = useState(false);
+  const [onShowReplyClick, setShowReplyClick] = useState(false);
   const contentRef = useRef();
   const [isEditable, setEditable] = useState(false);
-
+  const onSetReplyHandler = () => {
+    setReplyClick(false);
+  };
   const deletePostHandler = (e) => {
     e.preventDefault();
     dispatch(DeletePost(post._id));
@@ -74,7 +77,17 @@ const DisplayPostHelper = ({ post }) => {
   }, [isEditable]);
   return (
     <div className={classes.userPost}>
-      <div className={classes.postMainDiv}>
+      <div
+        className={classes.postMainDiv}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          console.log('EventFired');
+          if (e.key === 'Escape') {
+            setShowReplyClick(false);
+            setReplyClick(false);
+          }
+        }}
+      >
         <div className={classes.imageOthers}>
           <img src={post.postedBy.profilePic} />
           <div className={classes.otherContent}>
@@ -105,12 +118,14 @@ const DisplayPostHelper = ({ post }) => {
                 <FaFacebookMessenger
                   onClick={(e) => {
                     setReplyClick((old) => !old);
+                    setShowReplyClick(false);
                   }}
                   className={classes.icon}
                 />
                 <span
                   onClick={() => {
-                    dispatch({ type: 'showReply' });
+                    setShowReplyClick((old) => !old);
+                    setReplyClick(false);
                   }}
                   style={{ cursor: 'pointer' }}
                 >
@@ -150,8 +165,13 @@ const DisplayPostHelper = ({ post }) => {
           </div>
         )}
       </div>
-      {onReplyClick && <ReplyPostForm onClick={onClickHandler} />}
-      {state.showReplies && <DisplayReplies replies={post.replies} />}
+      {onReplyClick && (
+        <ReplyPostForm
+          onClick={onClickHandler}
+          onHideForm={onSetReplyHandler}
+        />
+      )}
+      {onShowReplyClick && <DisplayReplies replies={post.replies} />}
     </div>
   );
 };

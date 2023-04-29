@@ -1,7 +1,7 @@
 .container {
   margin-left: 70px;
   width: 600px;
-  max-height: 300px;
+  /* max-height: 300px; */
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -29,6 +29,9 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+}
+.postMainDiv:focus {
+  outline: none;
 }
 .imageOthers {
   display: flex;

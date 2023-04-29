@@ -30,12 +30,6 @@ const reducer = (state = initialState, action) => {
         postData: [payload, ...state.postData],
       };
     }
-    case 'showReply': {
-      return {
-        ...state,
-        showReplies: !state.showReplies,
-      };
-    }
     case 'ADD_REPLY': {
       return {
         ...state,
