@@ -1,6 +1,4 @@
 import classes from './display.module.css';
-import axios from 'axios';
-import { DeletePost } from '../../../ApiCall/Delete';
 import { useEffect, useRef, useState } from 'react';
 import ReplyPostForm from '../ReplyPost/ReplyPostForm';
 import DisplayReplies from '../ReplyPost/DisplayReplies';

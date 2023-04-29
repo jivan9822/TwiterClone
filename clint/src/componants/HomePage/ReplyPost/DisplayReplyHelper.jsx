@@ -39,11 +39,7 @@ const DisplayReplyHelper = ({ reply }) => {
               className={classes.delBtn}
               onClick={deleteReplyHandler}
             />
-            <FaEdit
-              fill='black'
-              className={classes.edtBtn}
-              // onClick={() => setEditable(true)}
-            />
+            <FaEdit fill='black' className={classes.edtBtn} />
           </div>
         )}
       </div>
