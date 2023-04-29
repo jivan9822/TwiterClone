@@ -45,6 +45,7 @@ img {
 }
 .iconDiv {
   display: flex;
+  margin-left: 60px;
   gap: 50px;
 }
 .otherContent {
