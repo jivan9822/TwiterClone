@@ -6,6 +6,7 @@ const mongoose = require('./src/Utils/MongooseConnection');
 const userRoute = require('./src/Routes/UserRoute');
 const userPostRoute = require('./src/Routes/PostRoute');
 const userActionRoute = require('./src/Routes/UserAction');
+const userTweetRoute = require('./src/Model/TweetModel');
 const AppError = require('./src/Utils/AppError');
 const { globalErrorHandler } = require('./src/Utils/globalErrorHandler');
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use('/user', userRoute);
 app.use('/userPost', userPostRoute);
 app.use('/userAction', userActionRoute);
+app.use('/userTweet', userTweetRoute);
 
 app.all('*', (req, res, next) => {
   return next(new AppError(`The ${req.originalUrl} not found in server!`, 400));
