@@ -10,7 +10,7 @@ const DisplayReplyHelper = ({ reply }) => {
   const flag = reply.userId._id === user._id;
   const deleteReplyHandler = (e) => {
     e.preventDefault();
-    dispatch(DeleteReply(reply._id));
+    dispatch(DeleteReply(reply._id, reply.postId._id || reply.postId));
   };
   return (
     <div className={classes.postMainDiv}>
