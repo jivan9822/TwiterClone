@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import classes from './replypost.module.css';
+import { useDispatch } from 'react-redux';
+import { onClickHandler } from '../../../ApiCall/UserAction';
 
-function ReplyPostForm({ onClick, onHideForm }) {
+function ReplyPostForm({ onHideForm, userId, postId }) {
+  const dispatch = useDispatch();
   const [text, setText] = useState('');
-
+  const onClickAction = (e, name, reply) => {
+    e.preventDefault();
+    dispatch(onClickHandler({ name, reply, userId, postId }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     onHideForm();
     if (text.length > 1) {
-      onClick(e, 'reply', text);
+      onClickAction(e, 'reply', text);
     }
     setText('');
   };
