@@ -38,6 +38,12 @@ const UserSchema = mongoose.Schema({
       ref: 'Post',
     },
   ],
+  tweets: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: 'Tweet',
+    },
+  ],
 });
 
 UserSchema.pre('save', async function (next) {

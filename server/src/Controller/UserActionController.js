@@ -30,11 +30,6 @@ exports.userLike = CatchAsync(async (req, res, next) => {
   });
 });
 
-exports.userRetweet = CatchAsync(async (req, res, next) => {
-  const { postId, userId } = req.body;
-  res.send('retweet');
-});
-
 exports.userReply = CatchAsync(async (req, res, next) => {
   const postReply = await Reply.create(req.body);
   const populatedReply = await Reply.populate(postReply, {

@@ -20,6 +20,12 @@ const PostSchema = mongoose.Schema(
         ref: 'User',
       },
     ],
+    tweets: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'Tweet',
+      },
+    ],
   },
   {
     timestamps: true,

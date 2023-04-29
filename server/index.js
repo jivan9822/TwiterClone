@@ -6,7 +6,7 @@ const mongoose = require('./src/Utils/MongooseConnection');
 const userRoute = require('./src/Routes/UserRoute');
 const userPostRoute = require('./src/Routes/PostRoute');
 const userActionRoute = require('./src/Routes/UserAction');
-const userTweetRoute = require('./src/Model/TweetModel');
+const userTweetRoute = require('./src/Routes/UserTweetRoute');
 const AppError = require('./src/Utils/AppError');
 const { globalErrorHandler } = require('./src/Utils/globalErrorHandler');
 
