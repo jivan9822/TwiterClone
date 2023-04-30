@@ -23,10 +23,12 @@ exports.getAllPosts = CatchAsync(async (req, res, next) => {
       options: { sort: { createdAt: -1 } }, // Sort the replies array on createdAt
     });
 
+  const newPost = await Post.populate(posts, { path: 'retweetData.postedBy' });
+
   res.status(200).json({
     status: true,
     message: `${posts.length} posts found!`,
-    posts,
+    posts: newPost,
   });
 });
 

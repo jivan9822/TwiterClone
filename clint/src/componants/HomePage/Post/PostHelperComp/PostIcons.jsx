@@ -8,6 +8,9 @@ import { AddTweet } from '../../../../ApiCall/Tweet';
 const PostIcons = (props) => {
   const userId = useSelector((state) => state.loginUser._id);
   const dispatch = useDispatch();
+  const postId = props.post.retweetData
+    ? props.post.retweetData._id
+    : props.post._id;
   const initialColor = props.post.likes?.includes(userId);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(props.post?.likes?.length);
@@ -25,7 +28,6 @@ const PostIcons = (props) => {
     );
   };
   const onTweetClick = (e, postId) => {
-    console.log('Clicked!');
     e.preventDefault();
     dispatch(AddTweet(postId, userId));
   };
@@ -51,7 +53,7 @@ const PostIcons = (props) => {
       </span>
       <span className={classes.spanDiv}>
         <FaRetweet
-          onClick={(e) => onTweetClick(e, props.post._id)}
+          onClick={(e) => onTweetClick(e, postId)}
           className={classes.icon}
         />
         0

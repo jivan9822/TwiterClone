@@ -7,6 +7,7 @@ import { EditPost } from '../../../ApiCall/Edit';
 import PostHeader from './PostHelperComp/PostHeader';
 import PostIcons from './PostHelperComp/PostIcons';
 import PostDeleteEdit from './PostHelperComp/PostDeleteEdit';
+import PostRetweet from './PostHelperComp/PostRetweet';
 
 const DisplayPostHelper = ({ post }) => {
   const userId = useSelector((state) => state.loginUser._id);
@@ -50,13 +51,17 @@ const DisplayPostHelper = ({ post }) => {
       >
         <div className={classes.imageOthers}>
           <div className={classes.otherContent}>
-            <PostHeader
-              post={post}
-              contentRef={contentRef}
-              isEditable={isEditable}
-              editHandler={editHandler}
-              onEnter={onEnter}
-            />
+            {post.retweetData ? (
+              <PostRetweet post={post} />
+            ) : (
+              <PostHeader
+                post={post}
+                contentRef={contentRef}
+                isEditable={isEditable}
+                editHandler={editHandler}
+                onEnter={onEnter}
+              />
+            )}
             <PostIcons
               setReplyClick={setReplyClick}
               setShowReplyClick={setShowReplyClick}
