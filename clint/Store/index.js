@@ -51,7 +51,9 @@ const reducer = (state = initialState, action) => {
       });
       post = post.filter((each) => {
         if (each._id === payload.postId) {
-          each.reTweetUsers.shift(payload.userId);
+          each.reTweetUsers = each.reTweetUsers.filter(
+            (each) => each !== payload.userId
+          );
         }
         return each;
       });
