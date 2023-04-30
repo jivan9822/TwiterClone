@@ -43,6 +43,7 @@ img {
   size: 10px;
   cursor: pointer;
 }
+
 .iconDiv {
   display: flex;
   margin-left: 60px;
@@ -58,10 +59,35 @@ h3 {
   margin: 5px;
 }
 /* { display: 'flex', alignItems: 'center', gap: '5px' } */
-.spanDiv {
+.spanDivTweet {
   display: flex;
   align-items: center;
   gap: 5px;
+  padding: 5px;
+  border-radius: 50%;
+}
+.spanDivTweet:hover {
+  background-color: rgba(131, 246, 157, 0.559);
+}
+.spanDivLike {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 50%;
+}
+.spanDivLike:hover {
+  background-color: rgba(246, 131, 131, 0.559);
+}
+.spanDivReply {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 50%;
+}
+.spanDivReply:hover {
+  background-color: rgba(131, 135, 246, 0.559);
 }
 .editDeleteBtn {
   display: flex;

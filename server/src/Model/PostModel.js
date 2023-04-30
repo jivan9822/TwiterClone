@@ -20,10 +20,10 @@ const PostSchema = mongoose.Schema(
         ref: 'User',
       },
     ],
-    reTweets: [
+    reTweetUsers: [
       {
         type: mongoose.Types.ObjectId,
-        ref: 'Tweet',
+        ref: 'User',
       },
     ],
     retweetData: {

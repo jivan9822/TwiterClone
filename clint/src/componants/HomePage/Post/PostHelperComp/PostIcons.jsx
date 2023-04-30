@@ -14,6 +14,7 @@ const PostIcons = (props) => {
   const initialColor = props.post.likes?.includes(userId);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(props.post?.likes?.length);
+
   const onClickAction = (e, name, reply, postId) => {
     e.preventDefault();
     dispatch(
@@ -33,7 +34,7 @@ const PostIcons = (props) => {
   };
   return (
     <div className={classes.iconDiv}>
-      <span className={classes.spanDiv}>
+      <span className={classes.spanDivReply}>
         <FaFacebookMessenger
           onClick={(e) => {
             props.setReplyClick((old) => !old);
@@ -48,17 +49,21 @@ const PostIcons = (props) => {
           }}
           style={{ cursor: 'pointer' }}
         >
-          {props.post.replies?.length || ''}
+          {props.post.replies?.length || 0}
         </span>
       </span>
-      <span className={classes.spanDiv}>
+      <span
+        className={classes.spanDivTweet}
+        style={{ color: props.tweetColor }}
+      >
         <FaRetweet
           onClick={(e) => onTweetClick(e, postId)}
           className={classes.icon}
+          style={{ color: props.tweetColor }}
         />
-        0
+        {props.retweetLength}
       </span>
-      <span className={classes.spanDiv}>
+      <span className={classes.spanDivLike}>
         <FaHeart
           onClick={(e) => onClickAction(e, 'like', null, props.post._id)}
           className={classes.icon}

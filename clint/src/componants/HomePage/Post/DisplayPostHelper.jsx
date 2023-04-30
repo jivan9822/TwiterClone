@@ -11,6 +11,12 @@ import PostRetweet from './PostHelperComp/PostRetweet';
 
 const DisplayPostHelper = ({ post }) => {
   const userId = useSelector((state) => state.loginUser._id);
+  const tweetColor =
+    post.reTweetUsers.includes(userId) ||
+    (post.retweetData && post.postedBy._id === userId)
+      ? 'green'
+      : 'black';
+  const retweetLength = post.reTweetUsers.length || 0;
   const dispatch = useDispatch();
   const flag = post.postedBy._id === userId;
 
@@ -66,6 +72,8 @@ const DisplayPostHelper = ({ post }) => {
               setReplyClick={setReplyClick}
               setShowReplyClick={setShowReplyClick}
               post={post}
+              tweetColor={tweetColor}
+              retweetLength={retweetLength}
             />
           </div>
         </div>

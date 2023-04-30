@@ -14,12 +14,20 @@ exports.addTweet = CatchAsync(async (req, res, next) => {
   if (!reTweetPost) {
     reTweetPost = await Post.create({ postedBy: userId, retweetData: postId });
   }
-  let post = await Post.findByIdAndUpdate(postId, {
-    [action]: { reTweets: reTweetPost._id },
-  });
-  let user = await Post.findByIdAndUpdate(userId, {
-    [action]: { reTweets: reTweetPost._id },
-  });
+  let post = await Post.findByIdAndUpdate(
+    postId,
+    {
+      [action]: { reTweetUsers: userId },
+    },
+    { new: true }
+  );
+  let user = await User.findByIdAndUpdate(
+    userId,
+    {
+      [action]: { reTweets: reTweetPost._id },
+    },
+    { new: true }
+  );
   if (user) {
     setUserAuth(user._id, user);
   }
