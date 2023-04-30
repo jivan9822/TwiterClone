@@ -38,7 +38,7 @@ const UserSchema = mongoose.Schema({
       ref: 'Post',
     },
   ],
-  tweets: [
+  reTweets: [
     {
       type: mongoose.Types.ObjectId,
       ref: 'Tweet',

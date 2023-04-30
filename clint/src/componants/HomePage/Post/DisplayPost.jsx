@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const DisplayPost = () => {
   const posts = useSelector((state) => state.postData);
+  console.log(posts);
 
   return (
     <div className={classes.container}>

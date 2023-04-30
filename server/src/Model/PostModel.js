@@ -20,12 +20,16 @@ const PostSchema = mongoose.Schema(
         ref: 'User',
       },
     ],
-    tweets: [
+    reTweets: [
       {
         type: mongoose.Types.ObjectId,
         ref: 'Tweet',
       },
     ],
+    retweetData: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Post',
+    },
   },
   {
     timestamps: true,

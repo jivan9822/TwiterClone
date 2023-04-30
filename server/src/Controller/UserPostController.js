@@ -17,7 +17,7 @@ exports.addPost = CatchAsync(async (req, res, next) => {
 exports.getAllPosts = CatchAsync(async (req, res, next) => {
   const posts = await Post.find()
     .sort({ createdAt: -1 })
-    .populate('postedBy')
+    .populate(['postedBy', 'retweetData'])
     .populate({
       path: 'replies',
       options: { sort: { createdAt: -1 } }, // Sort the replies array on createdAt

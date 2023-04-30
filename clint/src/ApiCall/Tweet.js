@@ -6,7 +6,7 @@ export const AddTweet = (postId, userId) => {
       .post(
         `http://localhost:3002/userTweet/addTweet`,
         {
-          tweetId: postId,
+          postId,
           userId,
         },
         { withCredentials: true }
