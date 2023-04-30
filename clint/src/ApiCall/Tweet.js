@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const AddTweet = (postId, userId) => {
+  console.log(postId, userId);
   return (dispatch) => {
     axios
       .post(
@@ -13,11 +14,14 @@ export const AddTweet = (postId, userId) => {
       )
       .then((res) => {
         const post = res.data.reTweetPost;
-        console.log(post);
-        dispatch({
-          type: 'ADD_TWEET',
-          payload: { post, oldPost: { postId, userId } },
-        });
+        if (post) {
+          dispatch({
+            type: 'ADD_TWEET',
+            payload: { post, oldPost: { postId, userId } },
+          });
+        } else {
+          dispatch({ type: 'DELETE_TWEET', payload: { postId, userId } });
+        }
       })
       .catch((err) => {
         console.log(err);

@@ -41,6 +41,25 @@ const reducer = (state = initialState, action) => {
         postData: [payload.post, ...post],
       };
     }
+    case 'DELETE_TWEET': {
+      let post = state.postData.filter((each) => {
+        if (each.retweetData && each.postedBy._id === payload.userId) {
+          return each.retweetData._id !== payload.postId;
+        } else {
+          return each;
+        }
+      });
+      post = post.filter((each) => {
+        if (each._id === payload.postId) {
+          each.reTweetUsers.shift(payload.userId);
+        }
+        return each;
+      });
+      return {
+        ...state,
+        postData: post,
+      };
+    }
     case 'ADD_REPLY': {
       return {
         ...state,
