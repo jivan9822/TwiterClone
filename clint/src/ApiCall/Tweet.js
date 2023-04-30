@@ -12,7 +12,12 @@ export const AddTweet = (postId, userId) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res.data);
+        const post = res.data.reTweetPost;
+        console.log(post);
+        dispatch({
+          type: 'ADD_TWEET',
+          payload: { post, oldPost: { postId, userId } },
+        });
       })
       .catch((err) => {
         console.log(err);

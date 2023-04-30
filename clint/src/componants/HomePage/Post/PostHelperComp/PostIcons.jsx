@@ -15,13 +15,13 @@ const PostIcons = (props) => {
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(props.post?.likes?.length);
 
-  const onClickAction = (e, name, reply, postId) => {
+  const onClickAction = (e, name, reply, Id) => {
     e.preventDefault();
     dispatch(
       onClickHandler({
         name,
         reply,
-        postId,
+        postId: Id,
         userId,
         setLikeColor,
         setLikesLength,

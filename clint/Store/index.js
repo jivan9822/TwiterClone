@@ -29,6 +29,18 @@ const reducer = (state = initialState, action) => {
         postData: [payload, ...state.postData],
       };
     }
+    case 'ADD_TWEET': {
+      const post = state.postData.filter((each) => {
+        if (each._id === payload.oldPost.postId) {
+          each.reTweetUsers.push(payload.oldPost.userId);
+        }
+        return each;
+      });
+      return {
+        ...state,
+        postData: [payload.post, ...post],
+      };
+    }
     case 'ADD_REPLY': {
       return {
         ...state,
@@ -68,6 +80,7 @@ const reducer = (state = initialState, action) => {
         ),
       };
     }
+
     default:
       return state;
   }
