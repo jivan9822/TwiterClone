@@ -1,43 +1,21 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useRef } from 'react';
 import classes from './userreglog.module.css';
-import axios from 'axios';
-const PROXY = import.meta.env.VITE_PROXY;
+import { useDispatch } from 'react-redux';
+import { Login } from '../../ApiCall/Login';
 
-const initialState = {
-  userName: '',
-  password: '',
-};
-const reducer = (state, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case 'userName': {
-      return {
-        ...state,
-        userName: payload,
-      };
-    }
-    case 'password': {
-      return {
-        ...state,
-        password: payload,
-      };
-    }
-    default: {
-      throw new Error('Invalid action type');
-    }
-  }
-};
 function LoginPage(props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const dispatch = useDispatch();
   const [btnDisabled, setBtnDisabled] = useState(true);
+  const [userName, setUserName] = useState('');
+  const [password, setUserPass] = useState('');
   const onClickHandler = (e) => {
     e.preventDefault();
     props.onRegClick(false);
   };
   const onUserInputHandler = (e) => {
     const { name, value } = e.target;
-    dispatch({ type: name, payload: value.trim() });
-    if (state.userName.length > 2 && state.password.length > 2) {
+    name === 'password' ? setUserPass(value) : setUserName(value);
+    if (userName.length > 2 && password.length > 2) {
       setBtnDisabled(false);
     } else {
       setBtnDisabled(true);
@@ -45,20 +23,7 @@ function LoginPage(props) {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    axios
-      .post(
-        `${PROXY}/user/login`,
-        {
-          data: { userName: state.userName, password: state.password },
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(Login(userName, password));
   };
   return (
     <form className={classes.form} onSubmit={onSubmitHandler}>
@@ -70,7 +35,7 @@ function LoginPage(props) {
         <input
           type='text'
           name='userName'
-          value={state.userName}
+          value={userName}
           onChange={onUserInputHandler}
         />
       </div>
@@ -81,7 +46,7 @@ function LoginPage(props) {
         <input
           type='password'
           name='password'
-          value={state.password}
+          value={password}
           onChange={onUserInputHandler}
         />
       </div>

@@ -15,11 +15,14 @@ app.use(express.static('src/images/'));
 app.use(express.json());
 app.use(
   cors({
-    // origin: 'http://localhost:5173',
-    origin: 'https://tangerine-gumption-7869cd.netlify.app',
+    origin: [
+      'http://localhost:5173',
+      'https://tangerine-gumption-7869cd.netlify.app',
+    ],
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use('/user', userRoute);
 app.use('/userPost', userPostRoute);
