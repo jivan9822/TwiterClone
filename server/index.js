@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: 'http://localhost:5173',
-    origin: '*',
+    origin: 'https://tangerine-gumption-7869cd.netlify.app',
     credentials: true,
   })
 );
