@@ -1,11 +1,12 @@
 import axios from 'axios';
+const PROXY = import.meta.env.VITE_PROXY;
 
 export const onClickHandler = (data) => {
   const { name, reply, postId, userId, setLikesLength, setLikeColor } = data;
   return (dispatch) => {
     axios
       .post(
-        `http://localhost:3002/userAction/${name}`,
+        `${PROXY}/userAction/${name}`,
         { postId, userId, reply },
         { withCredentials: true }
       )

@@ -1,10 +1,11 @@
 import axios from 'axios';
+const PROXY = import.meta.env.VITE_PROXY;
 
 export const DeletePost = (postId) => {
   return (dispatch) => {
     axios
       .post(
-        'http://localhost:3002/userPost/deletePost',
+        `${PROXY}/userPost/deletePost`,
         { postId },
         { withCredentials: true }
       )
@@ -21,7 +22,7 @@ export const DeleteReply = (replyId, postId) => {
   return (dispatch) => {
     axios
       .post(
-        `http://localhost:3002/userAction/deleteReply`,
+        `${PROXY}/userAction/deleteReply`,
         { replyId },
         { withCredentials: true }
       )

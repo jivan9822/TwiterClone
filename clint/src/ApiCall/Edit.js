@@ -1,10 +1,11 @@
 import axios from 'axios';
+const PROXY = import.meta.env.VITE_PROXY;
 
 export const EditPost = (postId, newPost) => {
   return (dispatch) => {
     axios
       .post(
-        `http://localhost:3002/userPost/editPost`,
+        `${PROXY}/userPost/editPost`,
         { postId, newPost },
         { withCredentials: true }
       )

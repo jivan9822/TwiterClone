@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import classes from './userreglog.module.css';
 import axios from 'axios';
+const PROXY = import.meta.env.VITE_PROXY;
 
 let pass, confPass;
 const isValidInputs = ({ password, confirmPassword }) => {
@@ -64,7 +65,7 @@ const UserRegistration = (props) => {
         formData.append(key, value);
       });
       axios
-        .post('http://localhost:3002/user/registration', formData, {
+        .post(`${PROXY}/user/registration`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

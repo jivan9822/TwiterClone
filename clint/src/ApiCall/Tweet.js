@@ -1,11 +1,12 @@
 import axios from 'axios';
+const PROXY = import.meta.env.VITE_PROXY;
 
 export const AddTweet = (postId, userId) => {
   console.log(postId, userId);
   return (dispatch) => {
     axios
       .post(
-        `http://localhost:3002/userTweet/addTweet`,
+        `${PROXY}/userTweet/addTweet`,
         {
           postId,
           userId,

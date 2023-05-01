@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react';
 import classes from './userreglog.module.css';
 import axios from 'axios';
+const PROXY = import.meta.env.VITE_PROXY;
 
 const initialState = {
   userName: '',
@@ -46,7 +47,7 @@ function LoginPage(props) {
     e.preventDefault();
     axios
       .post(
-        'http://localhost:3002/user/login',
+        `${PROXY}/user/login`,
         {
           data: { userName: state.userName, password: state.password },
         },
