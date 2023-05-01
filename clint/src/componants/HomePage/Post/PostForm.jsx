@@ -14,7 +14,9 @@ const PostForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const post = postRef.current.value;
-    dispatch(AddPost(post));
+    if (post.length > 1) {
+      dispatch(AddPost(post));
+    }
     postRef.current.value = '';
   };
   return (
