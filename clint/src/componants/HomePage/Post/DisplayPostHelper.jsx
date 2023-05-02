@@ -10,7 +10,6 @@ import PostDeleteEdit from './PostHelperComp/PostDeleteEdit';
 import PostRetweet from './PostHelperComp/PostRetweet';
 
 const DisplayPostHelper = ({ post }) => {
-  console.log(post);
   const userId = useSelector((state) => state.loginUser._id);
   const tweetColor =
     post.reTweetUsers.includes(userId) ||

@@ -23,13 +23,17 @@
 .postMainDiv {
   display: flex;
   margin-left: 30px;
-  background-color: grey;
-  padding: 10px;
+  width: fit-content;
+  min-width: 300px;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.794);
+  border: 0.2px solid rgb(55, 55, 55);
+  padding: 5px;
   font-size: 12px;
   border-radius: 10px;
   margin-bottom: 5px;
   gap: 5px;
-  /* width: 80%; */
 }
 .postMainDiv img {
   width: 25px;

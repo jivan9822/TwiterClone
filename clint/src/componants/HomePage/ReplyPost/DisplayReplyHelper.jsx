@@ -6,6 +6,10 @@ import { DeleteReply } from '../../../ApiCall/Delete';
 
 const DisplayReplyHelper = ({ reply }) => {
   const user = useSelector((state) => state.loginUser);
+  const replyText =
+    reply.reply.length > 100
+      ? reply.reply.substring(0, 100) + '...'
+      : reply.reply;
   const dispatch = useDispatch();
   const flag = reply.userId._id === user._id;
   const deleteReplyHandler = (e) => {
@@ -28,7 +32,7 @@ const DisplayReplyHelper = ({ reply }) => {
           </span>
         </div>
         <div>
-          <h3>{reply.reply}</h3>
+          <p>{replyText}</p>
         </div>
       </div>
       <div>

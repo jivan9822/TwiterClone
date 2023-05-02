@@ -2,6 +2,9 @@ import moment from 'moment';
 import classes from '../display.module.css';
 
 const PostRetweet = (props) => {
+  let post = props.post.retweetData.content;
+  post = post.length > 100 ? post.substring(0, 100) + '...' : post;
+
   const reData = props.post.retweetData;
   const data = props.post;
   return (
@@ -26,15 +29,16 @@ const PostRetweet = (props) => {
             @{reData.postedBy.userName} --
             {moment(reData.createdAt).fromNow()}
           </span>
-          <h3
+          <p
+            style={{ fontFamily: 'Sono' }}
             ref={props.contentRef}
             contentEditable={props.isEditable}
             onBlur={props.editHandler}
             onKeyUp={props.onEnter}
             suppressContentEditableWarning
           >
-            {props.post.retweetData.content}
-          </h3>
+            {post}
+          </p>
         </div>
       </div>
     </>

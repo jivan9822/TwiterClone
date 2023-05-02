@@ -11,12 +11,13 @@ function ReplyPostForm({ onHideForm, userId, postId }) {
     dispatch(onClickHandler({ name, reply, userId, postId }));
   };
   const handleSubmit = (e) => {
+    console.log('Clicked!');
     e.preventDefault();
-    onHideForm();
     if (text.length > 1) {
       onClickAction(e, 'reply', text);
     }
     setText('');
+    onHideForm();
   };
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
@@ -27,7 +28,7 @@ function ReplyPostForm({ onHideForm, userId, postId }) {
     }
   };
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form}>
       <textarea
         className={classes.textarea}
         value={text}
@@ -36,7 +37,7 @@ function ReplyPostForm({ onHideForm, userId, postId }) {
         placeholder='Write a reply...'
         autoFocus
       />
-      <button className={classes.button} type='submit'>
+      <button className={classes.button} onClick={handleSubmit} type='submit'>
         Reply
       </button>
     </form>
