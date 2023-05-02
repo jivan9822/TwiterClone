@@ -1,5 +1,7 @@
 const Post = require('../Model/PostModel');
+const User = require('../Model/UserModel');
 const { CatchAsync } = require('../Utils/CatchAsync');
+const { setUserAuth } = require('../Utils/RedisHandler');
 
 exports.addPost = CatchAsync(async (req, res, next) => {
   req.body.content = req.body.post;
@@ -45,7 +47,20 @@ exports.editPost = CatchAsync(async (req, res, next) => {
 
 exports.deletePost = CatchAsync(async (req, res, next) => {
   const postId = req.body.postId;
-  await Post.findByIdAndDelete(postId);
+  const post = await Post.findByIdAndDelete(postId);
+  if (post.retweetData) {
+    await Post.findByIdAndUpdate(post.retweetData, {
+      $pull: { reTweetUsers: post.postedBy },
+    });
+    const user = await User.findByIdAndUpdate(post.postedBy, {
+      $pull: { reTweets: post.retweetData },
+    });
+    if (user) {
+      setUserAuth(user._id, user);
+    }
+  } else {
+    await Post.deleteMany({ retweetData: postId });
+  }
   res.status(204).json({
     status: true,
   });
