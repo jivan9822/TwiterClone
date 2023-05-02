@@ -32,7 +32,7 @@ const PostHeader = (props) => {
         </span>
         <p
           onClick={handleClick}
-          style={{ fontFamily: 'Sono' }}
+          style={{ fontFamily: 'Sono', fontSize: '16px' }}
           ref={props.contentRef}
           contentEditable={props.isEditable}
           onBlur={props.editHandler}
