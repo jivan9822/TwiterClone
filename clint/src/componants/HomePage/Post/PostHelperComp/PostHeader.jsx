@@ -21,7 +21,7 @@ const PostHeader = (props) => {
           {moment(props.post.createdAt).fromNow()}
         </span>
         <p
-          style={{ fontFamily: 'sans-serif' }}
+          style={{ fontFamily: 'Sono' }}
           ref={props.contentRef}
           contentEditable={props.isEditable}
           onBlur={props.editHandler}
