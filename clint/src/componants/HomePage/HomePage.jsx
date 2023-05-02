@@ -1,5 +1,5 @@
 import PostForm from './Post/PostForm';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classes from './home.module.css';
 import { FaUser } from 'react-icons/fa';
 import HomePageIcon from './HomePageIcon';

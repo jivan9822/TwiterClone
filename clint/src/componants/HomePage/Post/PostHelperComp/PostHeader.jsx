@@ -2,6 +2,10 @@ import moment from 'moment';
 import classes from '../display.module.css';
 
 const PostHeader = (props) => {
+  const post =
+    props.post.content.length > 100
+      ? props.post.content.substring(0, 100) + '...'
+      : props.post.content;
   return (
     <div className={classes.imageOthers}>
       <img src={props.post.postedBy.profilePic} />
@@ -16,15 +20,16 @@ const PostHeader = (props) => {
           @{props.post.postedBy.userName} --
           {moment(props.post.createdAt).fromNow()}
         </span>
-        <h3
+        <p
+          style={{ fontFamily: 'sans-serif' }}
           ref={props.contentRef}
           contentEditable={props.isEditable}
           onBlur={props.editHandler}
           onKeyUp={props.onEnter}
           suppressContentEditableWarning
         >
-          {props.post.content}
-        </h3>
+          {post}
+        </p>
       </div>
     </div>
   );
