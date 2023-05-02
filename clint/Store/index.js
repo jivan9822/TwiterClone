@@ -17,6 +17,12 @@ const reducer = (state = initialState, action) => {
         loginUser: payload,
       };
     }
+    case 'SET_ALL_USERS': {
+      return {
+        ...state,
+        allUser: payload,
+      };
+    }
     case 'SET_POST_DATA': {
       return {
         ...state,
@@ -30,7 +36,7 @@ const reducer = (state = initialState, action) => {
       };
     }
     case 'ADD_TWEET': {
-      const post = state.postData.filter((each) => {
+      const post = state.postData.map((each) => {
         if (each._id === payload.oldPost.postId) {
           each.reTweetUsers.push(payload.oldPost.userId);
         }
@@ -88,9 +94,43 @@ const reducer = (state = initialState, action) => {
     }
 
     case 'DELETE_POST': {
+      let newData = state.postData;
+      let user = state.loginUser;
+      let users = state.allUser;
+
+      if (payload.retweetData?._id) {
+        // remove retweet user from original post
+        newData = state.postData.map((each) => {
+          if (each._id === payload.retweetData._id) {
+            each.reTweetUsers = each.reTweetUsers.filter(
+              (each) => each !== payload.postedBy._id
+            );
+          }
+          return each;
+        });
+        // remove retweet from users retweets
+        user.reTweets = user.reTweets.filter((each) => each !== payload._id);
+        // remove retweet post from post data
+        newData = newData.filter((each) => each._id !== payload._id);
+      } else {
+        console.log('WrongCalled!');
+        users = state.allUser.map((each) => {
+          each.likes.filter((each) => each._id != payload.retweetData?._id);
+          each.reTweets.filter((each) => each._id != payload._id);
+          console.log(each.likes);
+          console.log(each.reTweets);
+          return each;
+        });
+        newData = newData.filter((each) => each._id !== payload._id);
+        newData = newData.filter(
+          (each) => each.retweetData?._id !== payload._id
+        );
+      }
       return {
         ...state,
-        postData: state.postData.filter((each) => each._id !== payload),
+        postData: newData,
+        loginUser: user,
+        allUser: users,
       };
     }
     case 'EDIT_POST': {

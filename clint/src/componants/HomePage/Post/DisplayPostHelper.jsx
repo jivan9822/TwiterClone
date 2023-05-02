@@ -10,6 +10,7 @@ import PostDeleteEdit from './PostHelperComp/PostDeleteEdit';
 import PostRetweet from './PostHelperComp/PostRetweet';
 
 const DisplayPostHelper = ({ post }) => {
+  console.log(post);
   const userId = useSelector((state) => state.loginUser._id);
   const tweetColor =
     post.reTweetUsers.includes(userId) ||
@@ -77,7 +78,7 @@ const DisplayPostHelper = ({ post }) => {
             />
           </div>
         </div>
-        {flag && <PostDeleteEdit id={post._id} setEditable={setEditable} />}
+        {flag && <PostDeleteEdit setEditable={setEditable} post={post} />}
       </div>
       {onReplyClick && (
         <ReplyPostForm

@@ -1,16 +1,16 @@
 import axios from 'axios';
 const PROXY = import.meta.env.VITE_PROXY;
 
-export const DeletePost = (postId) => {
+export const DeletePost = (post) => {
   return (dispatch) => {
     axios
       .post(
         `${PROXY}/userPost/deletePost`,
-        { postId },
+        { postId: post._id },
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch({ type: 'DELETE_POST', payload: postId });
+        dispatch({ type: 'DELETE_POST', payload: post });
       })
       .catch((err) => {
         console.log(err);
