@@ -3,6 +3,8 @@ import classes from './replypost.module.css';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteReply } from '../../../ApiCall/Delete';
+import DisplayContent from '../../../Utils/DisplayContent';
+import { useState } from 'react';
 
 const DisplayReplyHelper = ({ reply }) => {
   const user = useSelector((state) => state.loginUser);
@@ -10,8 +12,17 @@ const DisplayReplyHelper = ({ reply }) => {
     reply.reply.length > 100
       ? reply.reply.substring(0, 100) + '...'
       : reply.reply;
+
   const dispatch = useDispatch();
   const flag = reply.userId._id === user._id;
+  const [showContent, setShowContent] = useState(false);
+  const handleClick = () => {
+    setShowContent(true);
+  };
+
+  const handleClose = () => {
+    setShowContent(false);
+  };
   const deleteReplyHandler = (e) => {
     e.preventDefault();
     dispatch(DeleteReply(reply._id, reply.postId._id || reply.postId));
@@ -32,18 +43,21 @@ const DisplayReplyHelper = ({ reply }) => {
           </span>
         </div>
         <div>
-          <p>{replyText}</p>
+          <p onClick={handleClick}>{replyText}</p>
+          {showContent && (
+            <DisplayContent text={reply.reply} onClose={handleClose} />
+          )}
         </div>
       </div>
       <div>
         {flag && (
           <div className={classes.editDeleteBtn}>
             <FaTrash
-              fill='black'
+              fill='#646464'
               className={classes.delBtn}
               onClick={deleteReplyHandler}
             />
-            <FaEdit fill='black' className={classes.edtBtn} />
+            <FaEdit fill='#646464' className={classes.edtBtn} />
           </div>
         )}
       </div>

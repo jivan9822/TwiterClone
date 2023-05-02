@@ -1,5 +1,7 @@
 import moment from 'moment';
 import classes from '../display.module.css';
+import { useState } from 'react';
+import DisplayContent from '../../../../Utils/DisplayContent';
 
 const PostRetweet = (props) => {
   let post = props.post.retweetData.content;
@@ -7,6 +9,14 @@ const PostRetweet = (props) => {
 
   const reData = props.post.retweetData;
   const data = props.post;
+  const [showContent, setShowContent] = useState(false);
+  const handleClick = () => {
+    setShowContent(true);
+  };
+
+  const handleClose = () => {
+    setShowContent(false);
+  };
   return (
     <>
       <p className={classes.reTweetPara}>
@@ -30,6 +40,7 @@ const PostRetweet = (props) => {
             {moment(reData.createdAt).fromNow()}
           </span>
           <p
+            onClick={handleClick}
             style={{ fontFamily: 'Sono' }}
             ref={props.contentRef}
             contentEditable={props.isEditable}
@@ -39,6 +50,12 @@ const PostRetweet = (props) => {
           >
             {post}
           </p>
+          {showContent && (
+            <DisplayContent
+              text={props.post.retweetData.content}
+              onClose={handleClose}
+            />
+          )}
         </div>
       </div>
     </>

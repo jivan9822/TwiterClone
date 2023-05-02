@@ -14,6 +14,7 @@ const PostIcons = (props) => {
   const initialColor = props.post.likes?.includes(userId);
   const [likeColor, setLikeColor] = useState(initialColor ? 'red' : 'black');
   const [likesLength, setLikesLength] = useState(props.post?.likes?.length);
+  const [show, setShow] = useState('ShowReply');
 
   const onClickAction = (e, name, reply, Id) => {
     e.preventDefault();
@@ -42,15 +43,7 @@ const PostIcons = (props) => {
           }}
           className={classes.icon}
         />
-        <span
-          onClick={() => {
-            props.setShowReplyClick((old) => !old);
-            props.setReplyClick(false);
-          }}
-          style={{ cursor: 'pointer' }}
-        >
-          {props.post.replies?.length || 0}
-        </span>
+        <span>{props.post.replies?.length || 0}</span>
       </span>
       <span
         className={classes.spanDivTweet}
@@ -71,6 +64,19 @@ const PostIcons = (props) => {
         />
         {likesLength}
       </span>
+      {props.post.replies?.length > 0 && (
+        <span
+          className={classes.spanDivShowReply}
+          onClick={() => {
+            props.setShowReplyClick((old) => !old);
+            props.setReplyClick(false);
+            setShow((old) => (old === 'ShowReply' ? 'HideReply' : 'ShowReply'));
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          {show}
+        </span>
+      )}
     </div>
   );
 };
