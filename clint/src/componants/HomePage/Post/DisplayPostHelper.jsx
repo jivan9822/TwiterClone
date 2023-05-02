@@ -55,27 +55,25 @@ const DisplayPostHelper = ({ post }) => {
           }
         }}
       >
-        <div className={classes.imageOthers}>
-          <div className={classes.otherContent}>
-            {post.retweetData ? (
-              <PostRetweet post={post} />
-            ) : (
-              <PostHeader
-                post={post}
-                contentRef={contentRef}
-                isEditable={isEditable}
-                editHandler={editHandler}
-                onEnter={onEnter}
-              />
-            )}
-            <PostIcons
-              setReplyClick={setReplyClick}
-              setShowReplyClick={setShowReplyClick}
+        <div className={classes.otherContent}>
+          {post.retweetData ? (
+            <PostRetweet post={post} />
+          ) : (
+            <PostHeader
               post={post}
-              tweetColor={tweetColor}
-              retweetLength={retweetLength}
+              contentRef={contentRef}
+              isEditable={isEditable}
+              editHandler={editHandler}
+              onEnter={onEnter}
             />
-          </div>
+          )}
+          <PostIcons
+            setReplyClick={setReplyClick}
+            setShowReplyClick={setShowReplyClick}
+            post={post}
+            tweetColor={tweetColor}
+            retweetLength={retweetLength}
+          />
         </div>
         {flag && <PostDeleteEdit setEditable={setEditable} post={post} />}
       </div>
