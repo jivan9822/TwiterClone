@@ -1,13 +1,8 @@
 const User = require('../Model/UserModel');
 const { CatchAsync } = require('../Utils/CatchAsync');
+const { setUserAuth } = require('../Utils/RedisHandler');
 
-exports.UserLogin = (req, res, next) => {
-  // res.cookie('jwt', req.token, {
-  //   expires: new Date(
-  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-  //   ),
-  //   httpOnly: true,
-  // });
+exports.UserLogin = CatchAsync(async (req, res, next) => {
   res.cookie('jwt', req.token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
@@ -17,6 +12,7 @@ exports.UserLogin = (req, res, next) => {
     secure: true,
   });
 
+  setUserAuth(req.user._id, req.user);
   res.status(200).json({
     status: true,
     message: 'Login success!',
@@ -25,7 +21,19 @@ exports.UserLogin = (req, res, next) => {
       user: req.user,
     },
   });
-};
+});
+
+exports.UserLogOut = CatchAsync(async (req, res, next) => {
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    sameSite: 'None',
+    secure: true,
+  });
+  res.status(200).json({
+    status: true,
+    message: 'Logout Success!',
+  });
+});
 
 exports.isValidUser = CatchAsync(async (req, res, next) => {
   res.status(200).json({
@@ -36,6 +44,7 @@ exports.isValidUser = CatchAsync(async (req, res, next) => {
     },
   });
 });
+
 exports.userRegistration = CatchAsync(async (req, res, next) => {
   const user = await User.create(req.body);
   res.send('User Registration!');

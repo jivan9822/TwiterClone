@@ -8,8 +8,15 @@ import {
   FaSignOutAlt,
 } from 'react-icons/fa';
 import classes from './home.module.css';
+import { useDispatch } from 'react-redux';
+import { LogOut } from '../../ApiCall/LogOut';
 
 const HomePageIcon = ({ setIsHome }) => {
+  const dispatch = useDispatch();
+  const onLogOutClickHandler = (e) => {
+    e.preventDefault();
+    dispatch(LogOut());
+  };
   return (
     <div className={classes.Icons}>
       <FaTwitter
@@ -44,7 +51,7 @@ const HomePageIcon = ({ setIsHome }) => {
         size={40}
       />
       <FaSignOutAlt
-        onClick={() => setIsHome(false)}
+        onClick={onLogOutClickHandler}
         className={classes.icon}
         size={40}
       />

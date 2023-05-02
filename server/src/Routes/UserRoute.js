@@ -3,6 +3,7 @@ const {
   UserLogin,
   isValidUser,
   getAllUsers,
+  UserLogOut,
 } = require('../Controller/UserController');
 const { userRegistration } = require('../Controller/UserController');
 const { uploadUserPhoto } = require('../MiddleWare/fileUploads');
@@ -19,5 +20,6 @@ router.get('/isLogin', protect, isValidUser);
 router.get('/allusers', getAllUsers);
 
 router.post('/login', authentication, UserLogin);
+router.get('/logout', protect, UserLogOut);
 
 module.exports = router;

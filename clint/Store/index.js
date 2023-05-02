@@ -17,6 +17,12 @@ const reducer = (state = initialState, action) => {
         loginUser: payload,
       };
     }
+    case 'USER_LOGOUT': {
+      return {
+        ...state,
+        loginUser: null,
+      };
+    }
     case 'SET_ALL_USERS': {
       return {
         ...state,
