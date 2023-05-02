@@ -1,5 +1,9 @@
 const { fireBaseUpload } = require('../MiddleWare/FileUploadFirebase');
-const { UserLogin, isValidUser } = require('../Controller/UserController');
+const {
+  UserLogin,
+  isValidUser,
+  getAllUsers,
+} = require('../Controller/UserController');
 const { userRegistration } = require('../Controller/UserController');
 const { uploadUserPhoto } = require('../MiddleWare/fileUploads');
 const {
@@ -12,6 +16,7 @@ const router = require('express').Router();
 router.post('/registration', uploadUserPhoto, fireBaseUpload, userRegistration);
 
 router.get('/isLogin', protect, isValidUser);
+router.get('/allusers', getAllUsers);
 
 router.post('/login', authentication, UserLogin);
 

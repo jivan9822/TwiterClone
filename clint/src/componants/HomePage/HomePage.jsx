@@ -1,43 +1,27 @@
-import {
-  FaHome,
-  FaTwitter,
-  FaSearch,
-  FaBell,
-  FaEnvelope,
-  FaUser,
-  FaSignOutAlt,
-} from 'react-icons/fa';
-import classes from './home.module.css';
 import PostForm from './Post/PostForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import classes from './home.module.css';
+import { FaUser } from 'react-icons/fa';
+import HomePageIcon from './HomePageIcon';
 
 function HomePage() {
   const [isHome, setIsHome] = useState(true);
+  const [showIcons, setShowIcons] = useState(false);
+  const onClickHandler = (e) => {
+    e.preventDefault();
+    showIcons && setShowIcons((old) => !old);
+  };
+  const setIcons = (data) => {
+    setIsHome(data);
+    setShowIcons(false);
+  };
   return (
     <div className={classes.container}>
-      <div className={classes.Icons}>
-        <FaTwitter
-          onClick={() => setIsHome(true)}
-          className={classes.icon}
-          style={{ color: 'blue' }}
-          size={40}
-        />
-        <FaHome
-          onClick={() => setIsHome(true)}
-          className={classes.icon}
-          size={40}
-        />
-        <FaSearch
-          onClick={() => setIsHome(false)}
-          className={classes.icon}
-          size={40}
-        />
-        <FaBell className={classes.icon} size={40} />
-        <FaEnvelope className={classes.icon} size={40} />
-        <FaUser className={classes.icon} size={40} />
-        <FaSignOutAlt className={classes.icon} size={40} />
+      {showIcons && <HomePageIcon setIsHome={setIcons} />}
+      <FaUser onClick={() => setShowIcons(true)} />
+      <div onClick={onClickHandler}>
+        {isHome ? <PostForm /> : <h1>Work in progress!</h1>}
       </div>
-      <div>{isHome ? <PostForm /> : <h1>Work in progress!</h1>}</div>
     </div>
   );
 }

@@ -40,3 +40,8 @@ exports.userRegistration = CatchAsync(async (req, res, next) => {
   const user = await User.create(req.body);
   res.send('User Registration!');
 });
+
+exports.getAllUsers = CatchAsync(async (req, res, next) => {
+  const users = await User.find().populate(['likes', 'reTweets']);
+  res.send(users);
+});

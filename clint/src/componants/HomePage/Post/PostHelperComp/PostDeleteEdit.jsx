@@ -8,7 +8,7 @@ const PostDeleteEdit = (props) => {
 
   const deletePostHandler = (e) => {
     e.preventDefault();
-    dispatch(DeletePost(props.id));
+    dispatch(DeletePost(props.post));
   };
 
   return (
