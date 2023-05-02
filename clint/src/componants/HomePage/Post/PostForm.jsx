@@ -20,11 +20,11 @@ const PostForm = () => {
     postRef.current.value = '';
   };
   return (
-    <div>
-      <h1>Welcome-{user?.fname}</h1>
+    <div className={classes.postFormContainer}>
+      <h4 className={classes.welcome}>Welcome-{user?.fname}</h4>
       <div className={classes.postForm}>
         <div className={classes.container}>
-          <img src='images/profilePic.jpg' className={classes.img} />
+          <img src={user.profilePic} />
           <textarea
             className={classes.textarea}
             autoFocus
@@ -33,7 +33,7 @@ const PostForm = () => {
             onKeyUp={onEnterHandler}
           />
         </div>
-        <button onClick={submitHandler}>ADD-POST</button>
+        <button onClick={submitHandler}>Tweet</button>
       </div>
       <DisplayPost />
     </div>

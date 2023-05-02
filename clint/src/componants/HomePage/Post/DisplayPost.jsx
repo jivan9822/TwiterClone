@@ -6,7 +6,7 @@ const DisplayPost = () => {
   const posts = useSelector((state) => state.postData);
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container2}>
       {posts.map((post) => (
         <DisplayPostHelper key={post._id} post={post} />
       ))}
