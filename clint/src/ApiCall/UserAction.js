@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { postAction } from '../../Store';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const onClickHandler = (data) => {
@@ -12,7 +13,8 @@ export const onClickHandler = (data) => {
       )
       .then((res) => {
         if (name === 'reply') {
-          dispatch({ type: 'ADD_REPLY', payload: res.data.reply });
+          // dispatch({ type: 'ADD_REPLY', payload: res.data.reply });
+          dispatch(postAction.setAddReply(res.data.reply));
         }
         if (name === 'like') {
           setLikesLength(res.data.post?.likes.length);

@@ -5,7 +5,7 @@ import DisplayPost from './DisplayPost';
 import { AddPost } from '../../../ApiCall/Add';
 
 const PostForm = () => {
-  const user = useSelector((state) => state.loginUser);
+  const user = useSelector((state) => state.user.loginUser);
   const dispatch = useDispatch();
   const postRef = useRef();
   const onEnterHandler = (e) => {

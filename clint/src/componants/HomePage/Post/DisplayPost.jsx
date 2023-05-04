@@ -3,7 +3,7 @@ import DisplayPostHelper from './DisplayPostHelper';
 import { useSelector } from 'react-redux';
 
 const DisplayPost = () => {
-  const posts = useSelector((state) => state.postData);
+  const posts = useSelector((state) => state.post.postData);
 
   return (
     <div className={classes.container2}>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { userAction } from '../../Store';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const LogOut = () => {
@@ -6,7 +7,8 @@ export const LogOut = () => {
     axios
       .get(`${PROXY}/user/logout`, { withCredentials: true })
       .then((res) => {
-        dispatch({ type: 'USER_LOGOUT' });
+        // dispatch({ type: 'USER_LOGOUT' });
+        dispatch(userAction.setUserLogout());
         console.log(res);
       })
       .catch((err) => {

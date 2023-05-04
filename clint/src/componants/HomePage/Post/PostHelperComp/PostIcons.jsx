@@ -6,7 +6,7 @@ import { onClickHandler } from './../../../../ApiCall/UserAction';
 import { AddTweet } from '../../../../ApiCall/Tweet';
 
 const PostIcons = (props) => {
-  const userId = useSelector((state) => state.loginUser._id);
+  const userId = useSelector((state) => state.user.loginUser._id);
   const dispatch = useDispatch();
   const postId = props.post.retweetData
     ? props.post.retweetData._id

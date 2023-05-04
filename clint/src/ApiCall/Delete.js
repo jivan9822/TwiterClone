@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { postAction } from '../../Store';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const DeletePost = (post) => {
@@ -10,7 +11,8 @@ export const DeletePost = (post) => {
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch({ type: 'DELETE_POST', payload: post });
+        dispatch(postAction.setDeletePost(post));
+        // dispatch({ type: 'DELETE_POST', payload: post });
       })
       .catch((err) => {
         console.log(err);

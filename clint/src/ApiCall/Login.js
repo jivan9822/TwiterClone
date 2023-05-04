@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { userAction } from '../../Store';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const Login = (userName, password) => {
@@ -13,7 +14,8 @@ export const Login = (userName, password) => {
       )
       .then((res) => {
         const user = res.data.data.user;
-        dispatch({ type: 'SET_LOGIN_USER', payload: user });
+        // dispatch({ type: 'SET_LOGIN_USER', payload: user });
+        dispatch(userAction.setLoginUser(user));
       })
       .catch((err) => {
         console.log(err);

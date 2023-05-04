@@ -7,7 +7,7 @@ import DisplayContent from '../../../Utils/DisplayContent';
 import { useState } from 'react';
 
 const DisplayReplyHelper = ({ reply }) => {
-  const user = useSelector((state) => state.loginUser);
+  const user = useSelector((state) => state.user.loginUser);
   const replyText =
     reply.reply.length > 100
       ? reply.reply.substring(0, 100) + '...'

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { postAction } from '../../Store';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const EditPost = (postId, newPost) => {
@@ -10,7 +11,8 @@ export const EditPost = (postId, newPost) => {
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch({ type: 'EDIT_POST', payload: res.data.post });
+        // dispatch({ type: 'EDIT_POST', payload: res.data.post });
+        dispatch(postAction.setEditPost(res.data.post));
       })
       .catch((err) => {
         console.log(err);

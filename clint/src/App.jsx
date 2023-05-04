@@ -9,7 +9,7 @@ import { GetAllUsers } from './ApiCall/GetAllUsers';
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.loginUser);
+  const isLogin = useSelector((state) => state.user.loginUser);
   useEffect(() => {
     dispatch(GetUser());
     dispatch(GetPosts());
