@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { postAction } from '../../Store';
+import { postAction } from '../../Store/Slices/post-slice';
+import { userAction } from '../../Store/Slices/User-Slice';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const AddTweet = (postId, userId) => {
-  console.log(postId, userId);
   return (dispatch) => {
     axios
       .post(
@@ -17,13 +17,10 @@ export const AddTweet = (postId, userId) => {
       .then((res) => {
         const post = res.data.reTweetPost;
         if (post) {
-          // dispatch({
-          //   type: 'ADD_TWEET',
-          //   payload: { post, oldPost: { postId, userId } },
-          // });
           dispatch(
             postAction.setAddTweet({ post, oldPost: { postId, userId } })
           );
+          dispatch(userAction.addTweetToUser(postId));
         } else {
           // dispatch({ type: 'DELETE_TWEET', payload: { postId, userId } });
           dispatch(postAction.setDeleteTweet({ postId, userId }));

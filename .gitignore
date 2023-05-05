@@ -1,3 +1,4 @@
 clint/node_modules
 server/node_modules
+server/node_modules_old
 server/config.env

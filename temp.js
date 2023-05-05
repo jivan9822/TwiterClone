@@ -62,7 +62,6 @@ const reducer = (state = initialState, action) => {
         // remove retweet post from post data
         newData = newData.filter((each) => each._id !== payload._id);
       } else {
-        console.log('WrongCalled!');
         users = state.allUser.map((each) => {
           each.likes.filter((each) => each._id != payload.retweetData?._id);
           each.reTweets.filter((each) => each._id != payload._id);

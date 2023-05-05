@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { postAction } from '../../Store';
+import { postAction } from '../../Store/Slices/post-slice';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const EditPost = (postId, newPost) => {

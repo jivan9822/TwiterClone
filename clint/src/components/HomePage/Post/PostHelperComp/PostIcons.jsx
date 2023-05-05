@@ -40,6 +40,7 @@ const PostIcons = (props) => {
           onClick={(e) => {
             props.setReplyClick((old) => !old);
             props.setShowReplyClick(false);
+            setShow('ShowReply');
           }}
           className={classes.icon}
         />

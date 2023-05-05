@@ -1,14 +1,14 @@
 import classes from '../display.module.css';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost } from '../../../../ApiCall/Delete';
 
 const PostDeleteEdit = (props) => {
   const dispatch = useDispatch();
-
+  const data = useSelector((state) => state.user);
   const deletePostHandler = (e) => {
     e.preventDefault();
-    dispatch(DeletePost(props.post));
+    dispatch(DeletePost(props.post, data.loginUser, data.allUser));
   };
 
   return (

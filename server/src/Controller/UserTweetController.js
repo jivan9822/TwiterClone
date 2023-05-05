@@ -1,10 +1,13 @@
+const mongoose = require('mongoose');
 const Post = require('../Model/PostModel');
 const User = require('../Model/UserModel');
 const { CatchAsync } = require('../Utils/CatchAsync');
 const { setUserAuth } = require('../Utils/RedisHandler');
 
 exports.addTweet = CatchAsync(async (req, res, next) => {
-  const { userId, postId } = req.body;
+  // const { userId, postId } = req.body;
+  const userId = new mongoose.Types.ObjectId(req.body.userId);
+  const postId = new mongoose.Types.ObjectId(req.body.postId);
   const retweet = await Post.findOneAndDelete({
     postedBy: userId,
     retweetData: postId,
@@ -37,7 +40,7 @@ exports.addTweet = CatchAsync(async (req, res, next) => {
   let user = await User.findByIdAndUpdate(
     userId,
     {
-      [action]: { reTweets: reTweetPost._id },
+      [action]: { reTweets: reTweetPost.retweetData },
     },
     { new: true }
   );

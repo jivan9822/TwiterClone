@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { userAction } from '../../Store';
+import { userAction } from '../../Store/Slices/User-Slice';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const GetAllUsers = () => {
