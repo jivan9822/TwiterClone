@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { postAction } from '../../Store/Slices/post-slice';
-import { userAction } from '../../Store/Slices/user-Slice';
+import { userAction } from '../../Store/Slices/user-slice';
 const PROXY = import.meta.env.VITE_PROXY;
 
 export const AddTweet = (postId, userId) => {
