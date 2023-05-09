@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loginUser: null,
+  errorMsg: null,
   allUser: [],
 };
 
@@ -27,6 +28,9 @@ const userSlice = createSlice({
       const payload = action.payload;
       state.allUser = [...payload.users];
       state.loginUser = payload.user;
+    },
+    setErrorMsg(state, action) {
+      state.errorMsg = action.payload;
     },
   },
 });

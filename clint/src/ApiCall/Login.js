@@ -18,7 +18,9 @@ export const Login = (userName, password) => {
         dispatch(userAction.setLoginUser(user));
       })
       .catch((err) => {
-        console.log(err);
+        const errMsg = err.response.data.message;
+        console.log(errMsg);
+        dispatch(userAction.setErrorMsg(errMsg));
       });
   };
 };
