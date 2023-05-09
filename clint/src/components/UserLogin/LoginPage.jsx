@@ -3,7 +3,7 @@ import classes from './userreglog.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Login } from '../../ApiCall/Login';
 import DisplayErrorMsg from '../../Utils/DisplayErrorMsg';
-import { userAction } from '../../../Store/Slices/User-Slice';
+import { userAction } from '../../../Store/Slices/user-slice';
 
 function LoginPage(props) {
   const dispatch = useDispatch();
