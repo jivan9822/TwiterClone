@@ -22,7 +22,6 @@ export const AddTweet = (postId, userId) => {
           );
           dispatch(userAction.addTweetToUser(postId));
         } else {
-          // dispatch({ type: 'DELETE_TWEET', payload: { postId, userId } });
           dispatch(postAction.setDeleteTweet({ postId, userId }));
         }
       })

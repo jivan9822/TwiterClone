@@ -8,7 +8,6 @@ export const AddPost = (post) => {
       .post(`${PROXY}/userPost/addPost`, { post }, { withCredentials: true })
       .then((res) => {
         dispatch(postAction.setAddPost(res.data.post));
-        // dispatch({ type: 'ADD_POST', payload: res.data.post });
       })
       .catch((err) => {
         console.log(err);

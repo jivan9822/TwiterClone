@@ -7,7 +7,6 @@ export const LogOut = () => {
     axios
       .get(`${PROXY}/user/logout`, { withCredentials: true })
       .then((res) => {
-        // dispatch({ type: 'USER_LOGOUT' });
         dispatch(userAction.setUserLogout());
         console.log(res);
       })

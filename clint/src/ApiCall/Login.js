@@ -14,7 +14,6 @@ export const Login = (userName, password) => {
       )
       .then((res) => {
         const user = res.data.data.user;
-        // dispatch({ type: 'SET_LOGIN_USER', payload: user });
         dispatch(userAction.setLoginUser(user));
       })
       .catch((err) => {

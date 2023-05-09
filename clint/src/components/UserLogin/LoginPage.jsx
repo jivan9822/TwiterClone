@@ -8,7 +8,8 @@ import { userAction } from '../../../Store/Slices/user-slice';
 function LoginPage(props) {
   const dispatch = useDispatch();
   const ErrorMsg = useSelector((state) => state.user.errorMsg);
-  console.log(ErrorMsg);
+  const loginUser = useSelector((state) => state.user.loginUser);
+  const [loading, setLoading] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [userName, setUserName] = useState('');
   const [password, setUserPass] = useState('');
@@ -19,6 +20,7 @@ function LoginPage(props) {
   const onCloseHandler = (e) => {
     e.preventDefault();
     dispatch(userAction.setErrorMsg(null));
+    setLoading(false);
   };
   const onUserInputHandler = (e) => {
     const { name, value } = e.target;
@@ -31,48 +33,58 @@ function LoginPage(props) {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
     dispatch(Login(userName, password));
   };
   return (
     <>
-      {ErrorMsg === null ? (
-        <form className={classes.form} onSubmit={onSubmitHandler}>
-          <h1>Login</h1>
-          <div>
-            <label className={classes.label} htmlFor='userName'>
-              Username:
-            </label>
-            <input
-              type='text'
-              name='userName'
-              value={userName}
-              onChange={onUserInputHandler}
-            />
-          </div>
-          <div>
-            <label className={classes.label} htmlFor='password'>
-              Password:
-            </label>
-            <input
-              type='password'
-              name='password'
-              value={password}
-              onChange={onUserInputHandler}
-            />
-          </div>
-          <button
-            type='submit'
-            disabled={btnDisabled}
-            className={btnDisabled ? classes.btnNotAllowed : classes.btn}
-          >
-            Login
-          </button>
-          <p style={{ cursor: 'pointer' }} onClick={onClickHandler}>
-            Register?
-          </p>
-        </form>
+      {loading && !loginUser && !ErrorMsg ? (
+        <DisplayErrorMsg
+          text={'Loading...! Please wait!!'}
+          onClose={onCloseHandler}
+        />
       ) : (
-        <DisplayErrorMsg text={ErrorMsg} onClose={onCloseHandler} />
+        <>
+          {ErrorMsg === null ? (
+            <form className={classes.form} onSubmit={onSubmitHandler}>
+              <h1>Login</h1>
+              <div>
+                <label className={classes.label} htmlFor='userName'>
+                  Username:
+                </label>
+                <input
+                  type='text'
+                  name='userName'
+                  value={userName}
+                  onChange={onUserInputHandler}
+                />
+              </div>
+              <div>
+                <label className={classes.label} htmlFor='password'>
+                  Password:
+                </label>
+                <input
+                  type='password'
+                  name='password'
+                  value={password}
+                  onChange={onUserInputHandler}
+                />
+              </div>
+              <button
+                type='submit'
+                disabled={btnDisabled}
+                className={btnDisabled ? classes.btnNotAllowed : classes.btn}
+              >
+                Login
+              </button>
+              <p style={{ cursor: 'pointer' }} onClick={onClickHandler}>
+                Register?
+              </p>
+            </form>
+          ) : (
+            <DisplayErrorMsg text={ErrorMsg} onClose={onCloseHandler} />
+          )}
+        </>
       )}
     </>
   );

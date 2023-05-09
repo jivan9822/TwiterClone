@@ -35,10 +35,6 @@ export const DeleteReply = (replyId, postId) => {
       )
       .then((res) => {
         dispatch(postAction.setDeleteReply({ replyId, postId }));
-        // dispatch({
-        //   type: 'DELETE_REPLY',
-        //   payload: { replyId, postId },
-        // });
       })
       .catch((err) => {
         console.log(err);
