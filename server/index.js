@@ -26,7 +26,6 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     'Access-Control-Allow-Origin',
-    'http://localhost:5173',
     'https://tangerine-gumption-7869cd.netlify.app'
   );
   next();
