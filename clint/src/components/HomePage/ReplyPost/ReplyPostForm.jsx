@@ -11,7 +11,6 @@ function ReplyPostForm({ onHideForm, userId, postId }) {
     dispatch(onClickHandler({ name, reply, userId, postId }));
   };
   const handleSubmit = (e) => {
-    console.log('Clicked!');
     e.preventDefault();
     if (text.length > 1) {
       onClickAction(e, 'reply', text);

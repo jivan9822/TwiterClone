@@ -8,7 +8,6 @@ export const LogOut = () => {
       .get(`${PROXY}/user/logout`, { withCredentials: true })
       .then((res) => {
         dispatch(userAction.setUserLogout());
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

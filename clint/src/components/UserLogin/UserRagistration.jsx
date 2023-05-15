@@ -71,7 +71,6 @@ const UserRegistration = (props) => {
           },
         })
         .then((res) => {
-          console.log(res);
           setHasLoginSuccess(true);
         })
         .catch((err) => {
@@ -79,7 +78,6 @@ const UserRegistration = (props) => {
           const message = err.response.data.message;
           const match = /\{.*\}/.exec(message);
           const content = match ? match[0] : null;
-          console.log(content);
 
           setHasError(`${content} already exists! Please try different`);
         });
