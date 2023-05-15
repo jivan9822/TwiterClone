@@ -23,6 +23,11 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  next();
+});
+
 app.use(cookieParser());
 app.use('/user', userRoute);
 app.use('/userPost', userPostRoute);
