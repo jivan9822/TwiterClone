@@ -12,7 +12,6 @@ import PostRetweet from './PostHelperComp/PostRetweet';
 const DisplayPostHelper = ({ post }) => {
   const userId = useSelector((state) => state.user.loginUser._id);
   const user = useSelector((state) => state.user.allUser);
-  console.log(user);
   const tweetColor =
     post.reTweetUsers.includes(userId) ||
     (post.retweetData && post.postedBy._id === userId)
